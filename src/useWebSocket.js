@@ -1,33 +1,44 @@
 import { useEffect, useRef, useState } from "react";
 
-const WEBSOCKET_URL = `ws://3.37.98.203:8090/socket.subway`;
-
 /**
  * 지하철 노선 번호를 받아서 해당 노선 열차의 실시간 정보와 로딩 중인지 반환한다
  * @param {String} stationLine
- * @returns [messages, loading]
+ * @returns [messages, loading, socketConnected]
  */
 const useWebSocket = (stationLine) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
   const [socketConnected, setSocketConnected] = useState(false);
-  let webSocket = useRef(null);
+  const webSocket = useRef(null);
 
   useEffect(() => {
     // WebSocket 연결 초기화
-    webSocket.current = new WebSocket(WEBSOCKET_URL);
+    webSocket.current = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
 
     webSocket.current.onopen = () => {
-      console.log("[웹소켓 연결]");
-      sendMessage(stationLine); // 메시지 전송
+      console.log(`[웹소켓 연결] ${stationLine}호선`);
+      sendMessage(`${stationLine}호선`); // 메시지 전송
       setSocketConnected(true);
+    };
+
+    // str이 JSON인지 확인하는 함수
+    const isJson = (str) => {
+      try {
+        JSON.parse(str);
+        return true;
+      } catch (e) {
+        console.warn("[isJson 에러]", e);
+        return false;
+      }
     };
 
     // 서버로부터 메시지를 수신했을 때 호출
     webSocket.current.onmessage = (event) => {
-      console.log(event.data);
-      setMessages((prev) => [...prev, event.data]);
-      setLoading(false);
+      if (isJson(event.data)) {
+        const data = JSON.parse(event.data);
+        setMessages((prev) => [...prev, data]);
+        setLoading(false);
+      }
     };
 
     webSocket.current.onclose = () => {

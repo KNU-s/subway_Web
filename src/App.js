@@ -1,12 +1,26 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
-import SubwayLine1st from "./SubwayLine1st";
+import HomePage from "./HomePage";
+import SubwayLineDetailPage from "./SubwayLineDetailPage";
+import SubwayLinePage from "./SubwayLinePage";
 
 function App() {
-  return (
-    <div className="App">
-      <SubwayLine1st />
-    </div>
-  );
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <HomePage />,
+    },
+    {
+      path: "/line",
+      element: <SubwayLinePage />,
+    },
+    {
+      path: "/line/:lineNumber",
+      element: <SubwayLineDetailPage />,
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
