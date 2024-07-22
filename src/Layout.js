@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
+import styles from "./Layout.module.css";
 
 const Layout = () => {
   return (
-    <div>
-      This is Layout.
+    <div className={styles.layout}>
       <Outlet />
     </div>
   );

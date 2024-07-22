@@ -1,14 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import styles from "./HomePage.module.css";
 
 const HomePage = () => {
-  const navigate = useNavigate();
-  const handleClickSubwayLineButton = () => {
-    navigate(`/line`);
-  };
   return (
-    <div>
-      This is HomePage.
-      <button onClick={handleClickSubwayLineButton}>지하철 노선</button>
+    <div className={styles.container}>
+      <h1 className={styles.title}>실시간 지하철</h1>
+      <Link to={`/line`} className={styles.link}>
+        전체 노선 보기
+      </Link>
     </div>
   );
 };

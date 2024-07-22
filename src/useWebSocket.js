@@ -5,19 +5,21 @@ import { useEffect, useRef, useState } from "react";
  * @param {String} stationLine
  * @returns [messages, loading, socketConnected]
  */
-const useWebSocket = (stationLine) => {
+const useWebSocket = (lineName) => {
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
   const [socketConnected, setSocketConnected] = useState(false);
   const webSocket = useRef(null);
 
   useEffect(() => {
+    if (!lineName) return; // lineName이 설정된 후에만 웹소켓 연결을 시도
+
     // WebSocket 연결 초기화
     webSocket.current = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
 
     webSocket.current.onopen = () => {
-      console.log(`[웹소켓 연결] ${stationLine}호선`);
-      sendMessage(`${stationLine}호선`); // 메시지 전송
+      console.log(`[웹소켓 연결] ${lineName}`);
+      sendMessage(`${lineName}`); // 메시지 전송
       setSocketConnected(true);
     };
 
@@ -27,7 +29,7 @@ const useWebSocket = (stationLine) => {
         JSON.parse(str);
         return true;
       } catch (e) {
-        console.warn("[isJson 에러]", e);
+        console.warn("[isJson 에러]", str);
         return false;
       }
     };
@@ -56,7 +58,7 @@ const useWebSocket = (stationLine) => {
       console.log("clean up");
       webSocket.current?.close();
     };
-  }, [stationLine]);
+  }, [lineName]);
 
   const sendMessage = (message) => {
     if (webSocket.current && webSocket.current.readyState === WebSocket.OPEN) {
