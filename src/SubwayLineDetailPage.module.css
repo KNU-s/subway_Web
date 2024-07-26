@@ -35,6 +35,51 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  /* train_info_container를 자유롭게 움직이기 위함 */
+  position: relative;
+}
+
+.train_info_container {
+  /* track_line 위에서 자유롭게 움직이기 위함*/
+  position: absolute;
+}
+
+.train_icon_container {
+  /* train_info_box를 왼쪽 또는 오른쪽에 배치하기 위함 */
+  position: relative;
+}
+
+.train_info_box {
+  /* train_icon_container 안에서 아이콘 오른쪽에 배치하기 위함 */
+  position: absolute;
+  top: -13px;
+  /* 상하행에 따라 왼쪽 또는 오른쪽 배치해야 함 */
+
+  /* train_info을 세로로 배치하기 위함 */
+  display: inline-block;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 13px;
+
+  padding: 3px 18px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e4e4e4;
+}
+
+/* [상행] train_info_box 오른쪽에 속성 추가 */
+.train_info_box_right {
+  left: 20px;
+}
+
+/* [하행] train_info_box 왼쪽에 속성 추가 */
+.train_info_box_left {
+  right: 20px;
+}
+
+.train_info_text {
+  white-space: nowrap;
 }
 
 .track_station_circle {
@@ -44,6 +89,7 @@
   background-color: #ffffff;
   border: 1px solid #cccccc;
 
+  /* 화살표 아이콘 정중앙에 배치하기 위함 */
   display: flex;
   justify-content: center;
   align-items: center;
