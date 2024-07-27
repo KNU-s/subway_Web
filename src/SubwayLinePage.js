@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "./SubwayLinePage.module.css";
 
 const SubwayLinePage = () => {
   const [lineInfo, setLineInfo] = useState([]); // 각 노선의 name, id, stations
@@ -46,15 +45,15 @@ const SubwayLinePage = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>노선</h1>
-      <div className={styles.line_container}>
+    <div className="subwayline">
+      <h1 className="title">노선</h1>
+      <div className="line_container">
         {lineInfo.map((line, index) => (
-          <div key={index} className={styles.line}>
+          <div key={index} className="line">
             <Link
               to={`/line/${index}`}
               state={{ line: line }}
-              className={styles.line_title}
+              className="line_title"
             >
               {line.lineName}
             </Link>

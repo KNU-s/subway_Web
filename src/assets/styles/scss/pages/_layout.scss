@@ -24,19 +24,3 @@
     padding: 0 48px;
   }
 }
-
-/* box-sizing 속성 전체 적용하기 */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-h1 {
-  margin: 30px 0px;
-}

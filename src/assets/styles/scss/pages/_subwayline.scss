@@ -1,0 +1,11 @@
+.subwayline {
+  .line_container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 60px;
+  }
+
+  .line_title:hover {
+    text-decoration: underline;
+  }
+}
