@@ -4,11 +4,14 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import { useLocation } from "react-router-dom";
-import { ReactComponent as TrainIconExpressDown } from "./assets/images/train-icon-express-down.svg";
-import { ReactComponent as TrainIconExpressUp } from "./assets/images/train-icon-express-up.svg";
-import { ReactComponent as TrainIconRegularDown } from "./assets/images/train-icon-regular-down.svg";
-import { ReactComponent as TrainIconRegularUp } from "./assets/images/train-icon-regular-up.svg";
-import useWebSocket from "./useWebSocket";
+import TrainIcons from "../components/TrainIcons";
+import useWebSocket from "../hooks/useWebSocket";
+const {
+  TrainIconExpressDown,
+  TrainIconExpressUp,
+  TrainIconRegularDown,
+  TrainIconRegularUp,
+} = TrainIcons;
 
 /** train 정보를 바탕으로 해당 열차의 정보를 보여주고 위치를 결정한다 */
 const TrainInfo = ({ info }) => {
@@ -97,7 +100,7 @@ const Station = ({ stationName, trainInfo }) => {
   );
 };
 
-const SubwayLineDetailPage = () => {
+const LineDetail = () => {
   const { state } = useLocation();
   const [lineName, setLineName] = useState("");
   const [stations, setStations] = useState([]);
@@ -179,4 +182,4 @@ const SubwayLineDetailPage = () => {
   );
 };
 
-export default SubwayLineDetailPage;
+export default LineDetail;

@@ -1,8 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomePage from "./HomePage";
 import Layout from "./Layout";
-import SubwayLineDetailPage from "./SubwayLineDetailPage";
-import SubwayLinePage from "./SubwayLinePage";
+import { LineDetail, Lines, Main } from "./pages";
 
 function App() {
   const router = createBrowserRouter([
@@ -12,15 +10,15 @@ function App() {
       children: [
         {
           index: true,
-          element: <HomePage />,
+          element: <Main />,
         },
         {
           path: "/line",
-          element: <SubwayLinePage />,
+          element: <Lines />,
         },
         {
           path: "/line/:lineNumber",
-          element: <SubwayLineDetailPage />,
+          element: <LineDetail />,
         },
       ],
     },
