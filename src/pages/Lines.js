@@ -7,10 +7,6 @@ const Lines = () => {
   const [lineInfo, setLineInfo] = useState([]);
 
   useEffect(() => {
-    console.log("lineInfo", lineInfo);
-  }, [lineInfo]);
-
-  useEffect(() => {
     (async () => {
       await getStation()
         .then(getStationList)
