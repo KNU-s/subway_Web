@@ -1,6 +1,6 @@
 import SingleTrack from "./SingleTrack";
 
-const TrackTwoLine = ({ trainInfo }) => {
+const Tracks = ({ trainInfo }) => {
   return (
     <div className="track_two_line_container">
       <SingleTrack
@@ -15,4 +15,4 @@ const TrackTwoLine = ({ trainInfo }) => {
   );
 };
 
-export default TrackTwoLine;
+export default Tracks;

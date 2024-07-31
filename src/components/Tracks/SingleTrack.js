@@ -2,7 +2,7 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
-import TrainInfo from "../TrainInfo/TrainIcons";
+import TrainInfo from "../TrainInfo";
 
 const SingleTrack = ({ direction, trainInfo = [] }) => {
   return (
