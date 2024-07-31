@@ -9,7 +9,18 @@ const useWebSocket = (lineName) => {
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState([]);
   const [socketConnected, setSocketConnected] = useState(false);
-  const webSocket = useRef(null);
+  const webSocket = useRef(null); // 소켓을 저장할 인스턴스 변수
+
+  // str이 JSON인지 확인하는 함수
+  const isJson = (str) => {
+    try {
+      JSON.parse(str);
+      return true;
+    } catch (e) {
+      console.warn("[isJson 에러]", str);
+      return false;
+    }
+  };
 
   useEffect(() => {
     if (!lineName) return; // lineName이 설정된 후에만 웹소켓 연결을 시도
@@ -17,21 +28,11 @@ const useWebSocket = (lineName) => {
     // WebSocket 연결 초기화
     webSocket.current = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
 
+    // 소켓 연결 시
     webSocket.current.onopen = () => {
       console.log(`[웹소켓 연결] ${lineName}`);
       sendMessage(`${lineName}`); // 메시지 전송
       setSocketConnected(true);
-    };
-
-    // str이 JSON인지 확인하는 함수
-    const isJson = (str) => {
-      try {
-        JSON.parse(str);
-        return true;
-      } catch (e) {
-        console.warn("[isJson 에러]", str);
-        return false;
-      }
     };
 
     // 서버로부터 메시지를 수신했을 때 호출
@@ -43,6 +44,7 @@ const useWebSocket = (lineName) => {
       }
     };
 
+    // 소켓 해제 시 이벤트
     webSocket.current.onclose = () => {
       console.log("[웹소켓 연결 해제]");
       setSocketConnected(false);

@@ -3,7 +3,7 @@
  * @param {Array} rawData 원시 데이터 배열
  * @returns {Array} 가공된 노선 정보 배열
  */
-const getStationList = (rawData) => {
+const getLineList = (rawData) => {
   const lines = {};
   rawData.forEach((station) => {
     const {
@@ -33,4 +33,4 @@ const getStationList = (rawData) => {
   return Object.values(lines);
 };
 
-export default getStationList;
+export default getLineList;

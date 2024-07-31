@@ -1,25 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import getStation from "../apis/api/getStation";
-import getStationList from "../apis/services/getStationList";
+import { useLineFetch, useLineList } from "../context/useLineStore";
 
 const Lines = () => {
-  const [lineInfo, setLineInfo] = useState([]);
+  const lineList = useLineList();
+  const { fetchLineList } = useLineFetch();
 
   useEffect(() => {
-    (async () => {
-      await getStation()
-        .then(getStationList)
-        .then((stationList) => setLineInfo(stationList))
-        .catch((error) => console.log(error));
-    })();
-  }, []);
+    fetchLineList();
+  }, [fetchLineList]);
+
+  useEffect(() => {
+    console.log("lineList", lineList);
+  }, [lineList]);
 
   return (
     <div className="subwayline">
       <h1 className="title">노선</h1>
       <div className="line_container">
-        {lineInfo.map((line, index) => (
+        {lineList.map((line, index) => (
           <div key={index} className="line">
             <Link
               to={`/line/${index}`}
