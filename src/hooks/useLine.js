@@ -8,11 +8,27 @@ const fetchLine = async () => {
 };
 
 export const useLine = () => {
-  const { data } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["line"],
     queryFn: fetchLine,
   });
-  return data;
+
+  if (isLoading) {
+    // console.log("[useLine] loading");
+    return { data: [], isLoading: true, error: null };
+  }
+
+  if (error) {
+    console.log("[useLine] error");
+    return { data: [], isLoading: false, error };
+  }
+
+  // return 값이 무조건 배열 형식을 가지도록 한다
+  return {
+    data: Array.isArray(data) ? data : [],
+    isLoading: false,
+    error: null,
+  };
 };
 
 export const usePrefetchLine = () => {
