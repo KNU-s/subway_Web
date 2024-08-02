@@ -5,6 +5,7 @@
  */
 const getLineList = (rawData) => {
   const lines = {};
+  let uniqueLineId = 1; // rawData에서 받은 값에서 받은 lineId가 중복되는 경우가 발생해서 자체적으로 unique값을 생성했다.
   rawData.forEach((station) => {
     const {
       stationId,
@@ -18,8 +19,10 @@ const getLineList = (rawData) => {
       lines[lineName] = {
         lineName,
         lineId,
+        uniqueLineId,
         stations: [],
       };
+      uniqueLineId++;
     }
 
     // 노선에 따른 역 정보 추가하기
