@@ -5,11 +5,11 @@ const Tracks = ({ trainInfo }) => {
     <div className="track_two_line_container">
       <SingleTrack
         direction="down"
-        trainInfo={trainInfo ? trainInfo["하행"] : {}} // 이 부분 수정해야 함
+        trainInfo={trainInfo["하행"]} // 이 부분 수정해야 함
       />
       <SingleTrack
         direction="up"
-        trainInfo={trainInfo ? trainInfo["상행"] : {}} // 이 부분 수정해야 함
+        trainInfo={trainInfo["상행"]} // 이 부분 수정해야 함
       />
     </div>
   );

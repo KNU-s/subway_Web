@@ -14,8 +14,8 @@ const SingleTrack = ({ direction, trainInfo = [] }) => {
           <MdOutlineKeyboardArrowUp className="track_direction_icon" />
         )}
       </div>
-      {trainInfo.map((info) => (
-        <TrainInfo info={info} />
+      {trainInfo.map((info, index) => (
+        <TrainInfo info={info} key={index} />
       ))}
     </div>
   );

@@ -1,82 +1,160 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Station from "../components/Station";
+import {
+  useSelectLineName,
+  useSetSelectLineId,
+  useSetSelectLineName,
+} from "../context/useSelectLineStore";
+import { useLineById } from "../hooks/useLineById";
 import useWebSocket from "../hooks/useWebSocket";
 
 const LineDetail = () => {
-  const { state } = useLocation();
-  const [lineName, setLineName] = useState("");
-  const [stations, setStations] = useState([]);
-  const [trainInfoByStation, setTrainInfoByStation] = useState({});
+  const { lineId } = useParams();
+  const setSelectLineId = useSetSelectLineId(); // 현재 url을 통해 lineId를 글로벌하게 저장
+  const { data: currentLine } = useLineById(); // 글로벌 변수로 저장 후 해당하는 노선 정보 얻기 위함
 
-  const [messages, loading, socketConnected] = useWebSocket(lineName);
+  const setSelectLineName = useSetSelectLineName(); // selectLineName을 업데이트하기 위함
+  const selectLineName = useSelectLineName(); // 웹소켓 인자로 사용하기 위함
 
-  /** 가장 최신 열차 정보를 사용하여 열차 위치 표시하기 */
+  const [messages, loading, socketConnected] = useWebSocket(selectLineName); // lineName이 유효할 때만 useWebSocket을 호출한다
+
+  const [latestMessage, setLatestMessage] = useState([]);
+  const [stationList, setStationList] = useState([]);
+  const [trainInfo, setTrainInfo] = useState({});
+  const [trainInfoTemplate, setTrainInfoTemplate] = useState({}); // trainInfo 객체의 기본 구성 (only changed by stationList)
+
+  /** currentLine 변수가 업데이트되면 속성 stations를 통해 역 정보 얻는다 */
   useEffect(() => {
-    console.log("trainInfoByStation", trainInfoByStation);
-  }, [trainInfoByStation]);
+    if (currentLine) {
+      setStationList(currentLine.stations);
+    }
+  }, [currentLine]);
+
+  /** 마지막 소켓 메세지 업데이트 */
+  useEffect(() => {
+    if (messages.length > 0) {
+      /** messages가 빈 배열일 경우 예외 처리 */
+      setLatestMessage(messages[messages.length - 1]);
+    }
+  }, [messages]);
 
   /**
-   * 서버에서 5초마다 실시간 열차 정보가 오면 처리
-   * 기존 trainInfoByStation의 정보를 가장 최신 정보로 업데이트한다
+   * 마지막 소켓 메시지로 trainInfo 업데이트
+   * 이때 trainInfoTemplate 사용한다.
    */
   useEffect(() => {
-    console.log("messages", messages);
+    const newTrainInfo = { ...trainInfoTemplate };
+    latestMessage.forEach((train) => {
+      newTrainInfo?.[train.statnNm]?.[train.updnLine]?.push({ ...train });
+    });
+    setTrainInfo(newTrainInfo);
+  }, [latestMessage, trainInfoTemplate]);
 
-    if (messages.length) {
-      const updatedTrainInfo = {};
-      stations.forEach((station) => {
-        updatedTrainInfo[station.stationName] = {};
-      });
-
-      const message = messages[messages.length - 1]; // 가장 마지막 정보만 화면에 띄운다
-      message.forEach((train) => {
-        const { statnNm, updnLine } = train;
-        // console.log(train);
-        if (!updatedTrainInfo.hasOwnProperty(statnNm)) {
-          updatedTrainInfo[statnNm] = {};
-        }
-        if (!updatedTrainInfo.hasOwnProperty(updnLine)) {
-          updatedTrainInfo[statnNm][updnLine] = [];
-        }
-        updatedTrainInfo[statnNm][updnLine].push(train);
-      });
-
-      setTrainInfoByStation(updatedTrainInfo);
-    }
-  }, [messages, stations]);
-
-  // 이 페이지의 노선 이름과 모든 지하철역 설정
+  /**
+   * stationList가 업데이트되면 trainInfoTemplate 객체 초기화
+   * 각 지하철 역 이름을 key로 하는 객체 생성
+   */
   useEffect(() => {
-    if (state?.line) {
-      setLineName(state.line.lineName);
-      setStations(state.line.stations);
+    const template = {};
+    stationList.forEach((station) => {
+      template[station.stationName] = {
+        // 각 역 객체의 값으로 상행, 하행 2개의 속성을 가진다
+        상행: [],
+        하행: [],
+      };
+    });
+    setTrainInfoTemplate(template);
+  }, [stationList]);
 
-      // trainInfoByStation 초기화
-      const initialTrainInfo = {};
-      state.line.stations.forEach((station) => {
-        initialTrainInfo[station.stationName] = {};
-      });
-      setTrainInfoByStation(initialTrainInfo);
+  /**
+   * 새로고침을 하면 useWebSocket이 실행되지 않는 문제를 해결하기 위해 추가한 코드
+   * currentLine이 변경될 때마다 전역변수 selectLineName을 업데이트한다.
+   * useWebSocket은 selectLineName에 의존하고 있기 때문에 새로고침하면 재실행된다.
+   */
+  useEffect(() => {
+    if (currentLine) {
+      setSelectLineName(currentLine.lineName);
     }
-  }, [state]);
+  }, [currentLine, setSelectLineName]);
+
+  /** 현재 url의 param을 글로벌 변수 selectLineId로 저장한다 */
+  useEffect(() => {
+    setSelectLineId(lineId);
+  }, [lineId, setSelectLineId]);
+
+  // MockData
+  // const stations = [
+  //   {
+  //     stationName: "이수역",
+  //     stationId: 111,
+  //   },
+  //   {
+  //     stationName: "사당역",
+  //     stationId: 222,
+  //   },
+  // ];
+
+  // 각 역마다 하행 배열, 상행 배열 속성 존재
+  // MockData
+  // const trainInfoByStation = {
+  //   이수역: {
+  //     하행: [
+  //       {
+  //         id: "66ab7568172b91406ae587e9",
+  //         btrainNo: "4183",
+  //         statnNm: "이수역",
+  //         statnFNm: "동작",
+  //         statnTNm: "사당",
+  //         bstatnNm: "사당",
+  //         arvlMsg: "전역 출발",
+  //         arvlStatus: "운행중",
+  //         updnLine: "하행",
+  //         subwayLine: "4호선",
+  //         direction: null,
+  //         btrainSttus: "일반",
+  //         lstcarAt: false,
+  //       },
+  //       {
+  //         id: "66ab7568172b91406ae587e9",
+  //         btrainNo: "4183",
+  //         statnNm: "이수역",
+  //         statnFNm: "동작",
+  //         statnTNm: "사당",
+  //         bstatnNm: "사당",
+  //         arvlMsg: "전역 출발",
+  //         arvlStatus: "운행중",
+  //         updnLine: "하행",
+  //         subwayLine: "4호선",
+  //         direction: null,
+  //         btrainSttus: "일반",
+  //         lstcarAt: false,
+  //       },
+  //     ],
+  //     상행: [],
+  //   },
+  // };
 
   return (
     <div className="subwaylinedetail">
-      <h1>{lineName}</h1>
+      <h1>{selectLineName}</h1>
       <div>
         {socketConnected ? "[연결됨]" : "[연결끊김]"}
         {socketConnected &&
           (loading ? "로딩 중..." : `받은 총 메시지 ${messages.length}개`)}
       </div>
       <div className="main_body_container">
-        {stations.map((station, index) => {
-          const { stationName } = station;
+        {Object.entries(trainInfo).map(([stationName, info]) => {
+          /** info 값이 없을 때 예외 처리 */
+          const defaultInfoObject = {
+            상행: [],
+            하행: [],
+          };
           return (
             <Station
-              key={index}
+              key={stationName}
               stationName={stationName}
-              trainInfo={trainInfoByStation[stationName]}
+              trainInfo={info || defaultInfoObject}
             />
           );
         })}
