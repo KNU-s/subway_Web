@@ -20,7 +20,8 @@
   },
   "scripts": {
     "start": "env-cmd -f .env.development react-scripts start",
-    "build": "env-cmd -f .env.production react-scripts build",
+    "start:https": "HTTPS=true SSL_CRT_FILE=./cert/localhost.pem SSL_KEY_FILE=./cert/localhost-key.pem env-cmd -f .env.development react-scripts start",
+    "build": "HTTPS=true SSL_CRT_FILE=./cert/localhost.pem SSL_KEY_FILE=./cert/localhost-key.pem env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
