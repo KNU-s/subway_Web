@@ -17,7 +17,7 @@ const useWebSocket = (lineName) => {
       JSON.parse(str);
       return true;
     } catch (e) {
-      console.warn("[isJson 에러]", str);
+      // console.warn("[isJson 에러]", str);
       return false;
     }
   };
@@ -57,7 +57,6 @@ const useWebSocket = (lineName) => {
     };
 
     return () => {
-      console.log("clean up");
       webSocket.current?.close();
     };
   }, [lineName]);

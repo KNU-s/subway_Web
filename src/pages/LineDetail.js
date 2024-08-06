@@ -51,14 +51,14 @@ const LineDetail = () => {
       const updatedTrainInfo = {};
 
       stationList.forEach((station) => {
-        updatedTrainInfo[station.stationName] = {};
+        updatedTrainInfo[station.stationName] = {
+          상행: [],
+          하행: [],
+        };
       });
 
       latestMessage.forEach((train) => {
         const { statnNm, updnLine } = train;
-        if (!updatedTrainInfo.hasOwnProperty(updnLine)) {
-          updatedTrainInfo[statnNm][updnLine] = [];
-        }
         updatedTrainInfo[statnNm][updnLine].push({ ...train });
       });
 
@@ -85,27 +85,26 @@ const LineDetail = () => {
   return (
     <div className="subwaylinedetail">
       <h1>{selectLineName}</h1>
-      <div>
-        {socketConnected ? "[연결됨]" : "[연결끊김]"}
-        {socketConnected &&
-          (loading ? "로딩 중..." : `받은 총 메시지 ${messages.length}개`)}
-      </div>
-      <div className="main_body_container">
-        {Object.entries(trainInfo).map(([stationName, info]) => {
-          /** info 값이 없을 때 예외 처리 */
-          const defaultInfoObject = {
-            상행: [],
-            하행: [],
-          };
-          return (
-            <Station
-              key={stationName}
-              stationName={stationName}
-              trainInfo={info || defaultInfoObject}
-            />
-          );
-        })}
-      </div>
+      {!socketConnected || loading ? (
+        "정보를 불러오는 중입니다. 잠시만 기다려 주세요."
+      ) : (
+        <div className="main_body_container">
+          {Object.entries(trainInfo).map(([stationName, info]) => {
+            /** info 값이 없을 때 예외 처리 */
+            const defaultInfoObject = {
+              상행: [],
+              하행: [],
+            };
+            return (
+              <Station
+                key={stationName}
+                stationName={stationName}
+                trainInfo={info || defaultInfoObject}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
