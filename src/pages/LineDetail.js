@@ -22,7 +22,6 @@ const LineDetail = () => {
   const [latestMessage, setLatestMessage] = useState([]);
   const [stationList, setStationList] = useState([]);
   const [trainInfo, setTrainInfo] = useState({});
-  const [trainInfoTemplate, setTrainInfoTemplate] = useState({}); // trainInfo 객체의 기본 구성 (only changed by stationList)
 
   /** currentLine 변수가 업데이트되면 속성 stations를 통해 역 정보 얻는다 */
   useEffect(() => {
@@ -40,32 +39,32 @@ const LineDetail = () => {
   }, [messages]);
 
   /**
-   * 마지막 소켓 메시지로 trainInfo 업데이트
-   * 이때 trainInfoTemplate 사용한다.
+   * 마지막 소켓 메시지(latestMessage)로 trainInfo 객체 업데이트
    */
   useEffect(() => {
-    const newTrainInfo = { ...trainInfoTemplate };
-    latestMessage.forEach((train) => {
-      newTrainInfo?.[train.statnNm]?.[train.updnLine]?.push({ ...train });
-    });
-    setTrainInfo(newTrainInfo);
-  }, [latestMessage, trainInfoTemplate]);
+    if (
+      Array.isArray(latestMessage) &&
+      latestMessage.length > 0 &&
+      Array.isArray(stationList) &&
+      stationList.length > 0
+    ) {
+      const updatedTrainInfo = {};
 
-  /**
-   * stationList가 업데이트되면 trainInfoTemplate 객체 초기화
-   * 각 지하철 역 이름을 key로 하는 객체 생성
-   */
-  useEffect(() => {
-    const template = {};
-    stationList.forEach((station) => {
-      template[station.stationName] = {
-        // 각 역 객체의 값으로 상행, 하행 2개의 속성을 가진다
-        상행: [],
-        하행: [],
-      };
-    });
-    setTrainInfoTemplate(template);
-  }, [stationList]);
+      stationList.forEach((station) => {
+        updatedTrainInfo[station.stationName] = {};
+      });
+
+      latestMessage.forEach((train) => {
+        const { statnNm, updnLine } = train;
+        if (!updatedTrainInfo.hasOwnProperty(updnLine)) {
+          updatedTrainInfo[statnNm][updnLine] = [];
+        }
+        updatedTrainInfo[statnNm][updnLine].push({ ...train });
+      });
+
+      setTrainInfo(updatedTrainInfo);
+    }
+  }, [latestMessage, stationList]);
 
   /**
    * 새로고침을 하면 useWebSocket이 실행되지 않는 문제를 해결하기 위해 추가한 코드
