@@ -83,58 +83,6 @@ const LineDetail = () => {
     setSelectLineId(lineId);
   }, [lineId, setSelectLineId]);
 
-  // MockData
-  // const stations = [
-  //   {
-  //     stationName: "이수역",
-  //     stationId: 111,
-  //   },
-  //   {
-  //     stationName: "사당역",
-  //     stationId: 222,
-  //   },
-  // ];
-
-  // 각 역마다 하행 배열, 상행 배열 속성 존재
-  // MockData
-  // const trainInfoByStation = {
-  //   이수역: {
-  //     하행: [
-  //       {
-  //         id: "66ab7568172b91406ae587e9",
-  //         btrainNo: "4183",
-  //         statnNm: "이수역",
-  //         statnFNm: "동작",
-  //         statnTNm: "사당",
-  //         bstatnNm: "사당",
-  //         arvlMsg: "전역 출발",
-  //         arvlStatus: "운행중",
-  //         updnLine: "하행",
-  //         subwayLine: "4호선",
-  //         direction: null,
-  //         btrainSttus: "일반",
-  //         lstcarAt: false,
-  //       },
-  //       {
-  //         id: "66ab7568172b91406ae587e9",
-  //         btrainNo: "4183",
-  //         statnNm: "이수역",
-  //         statnFNm: "동작",
-  //         statnTNm: "사당",
-  //         bstatnNm: "사당",
-  //         arvlMsg: "전역 출발",
-  //         arvlStatus: "운행중",
-  //         updnLine: "하행",
-  //         subwayLine: "4호선",
-  //         direction: null,
-  //         btrainSttus: "일반",
-  //         lstcarAt: false,
-  //       },
-  //     ],
-  //     상행: [],
-  //   },
-  // };
-
   return (
     <div className="subwaylinedetail">
       <h1>{selectLineName}</h1>
