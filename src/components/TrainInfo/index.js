@@ -10,13 +10,14 @@ const {
 const TrainInfo = ({ info }) => {
   /** train 정보 바탕으로 아이콘 선택하기 */
   const getTrainIcon = (trainStatus, updnLine) => {
-    if (trainStatus === "일반") {
+    if (trainStatus !== "급행") {
+      // btrainSttus === "일반" || "ITX"
       if (updnLine === "상행" || updnLine === "내선") {
         return <TrainIconRegularUp />;
       } else if (updnLine === "하행" || updnLine === "외선") {
         return <TrainIconRegularDown />;
       }
-    } else if (trainStatus === "급행") {
+    } else {
       if (updnLine === "상행" || updnLine === "내선") {
         return <TrainIconExpressUp />;
       } else if (updnLine === "하행" || updnLine === "외선") {
@@ -44,6 +45,7 @@ const TrainInfo = ({ info }) => {
           <div className="train_info_text">{bstatnNm}</div>
           <div className="train_info_text">{btrainNo}</div>
           <div className="train_info_text">{arvlStatus}</div>
+          <div className="train_info_text">{arvlMsg}</div>
         </div>
       </div>
     </div>
