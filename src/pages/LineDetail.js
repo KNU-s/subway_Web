@@ -59,7 +59,14 @@ const LineDetail = () => {
 
       latestMessage.forEach((train) => {
         const { statnNm, updnLine } = train;
-        updatedTrainInfo[statnNm][updnLine].push({ ...train });
+
+        // statnNm 또는 updnLine에 매칭되는 역이 없는 열차의 예외 상황 처리
+        try {
+          updatedTrainInfo[statnNm][updnLine].push({ ...train });
+        } catch (error) {
+          console.log("[Error]", error);
+          console.log("[Error 발생한 Train]", train);
+        }
       });
 
       setTrainInfo(updatedTrainInfo);
