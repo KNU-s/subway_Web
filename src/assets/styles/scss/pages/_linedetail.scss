@@ -51,11 +51,14 @@
     position: relative;
   }
 
+  /* 상하행에 따라 왼쪽 또는 오른쪽 배치해야 함 */
   .train_info_box {
     /* train_icon_container 안에서 아이콘 오른쪽에 배치하기 위함 */
     position: absolute;
     top: -13px;
-    /* 상하행에 따라 왼쪽 또는 오른쪽 배치해야 함 */
+
+    /* 가려지지 않도록 상단에 배치 */
+    z-index: 99;
 
     /* train_info을 세로로 배치하기 위함 */
     display: inline-block;
