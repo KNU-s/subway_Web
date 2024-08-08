@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Station from "../components/Station";
+import SectionList from "../components/SectionList";
 import {
   useSelectLineName,
   useSetSelectLineId,
@@ -9,19 +9,19 @@ import {
 import { useLineById } from "../hooks/useLineById";
 import useWebSocket from "../hooks/useWebSocket";
 
+/** 현재 url의 lineId 값을 글로벌 변수 selectLineId로 저장 */
 const LineDetail = () => {
   const { lineId } = useParams();
   const setSelectLineId = useSetSelectLineId(); // 현재 url을 통해 lineId를 글로벌하게 저장
   const { data: currentLine } = useLineById(); // 글로벌 변수로 저장 후 해당하는 노선 정보 얻기 위함
+  const [stationList, setStationList] = useState([]); // curentLine의 stations 속성 값
 
-  const setSelectLineName = useSetSelectLineName(); // selectLineName을 업데이트하기 위함
-  const selectLineName = useSelectLineName(); // 웹소켓 인자로 사용하기 위함
+  const setSelectLineName = useSetSelectLineName(); // curentLine의 lineName 속성 값
+  const selectLineName = useSelectLineName(); // 타이틀 및 웹소켓 인자로 사용하기 위함
 
   const [messages, loading, socketConnected] = useWebSocket(selectLineName); // lineName이 유효할 때만 useWebSocket을 호출한다
-
-  const [latestMessage, setLatestMessage] = useState([]);
-  const [stationList, setStationList] = useState([]);
-  const [trainInfo, setTrainInfo] = useState({});
+  const [latestMessage, setLatestMessage] = useState([]); // 소켓 마지막 메시지
+  const [trainInfo, setTrainInfo] = useState({}); // 각 역에 매칭되는 모든 열차 배열들
 
   /** currentLine 변수가 업데이트되면 속성 stations를 통해 역 정보 얻는다 */
   useEffect(() => {
@@ -39,7 +39,7 @@ const LineDetail = () => {
   }, [messages]);
 
   /**
-   * 마지막 소켓 메시지(latestMessage)로 trainInfo 객체 업데이트
+   * 마지막 소켓 메시지(latestMessage)를 사용하여 trainInfo 객체 업데이트
    */
   useEffect(() => {
     if (
@@ -95,22 +95,7 @@ const LineDetail = () => {
       {!socketConnected || loading ? (
         "정보를 불러오는 중입니다. 잠시만 기다려 주세요."
       ) : (
-        <div className="main_body_container">
-          {Object.entries(trainInfo).map(([stationName, info]) => {
-            /** info 값이 없을 때 예외 처리 */
-            const defaultInfoObject = {
-              상행: [],
-              하행: [],
-            };
-            return (
-              <Station
-                key={stationName}
-                stationName={stationName}
-                trainInfo={info || defaultInfoObject}
-              />
-            );
-          })}
-        </div>
+        <SectionList stationList={stationList} trainInfo={trainInfo} />
       )}
     </div>
   );

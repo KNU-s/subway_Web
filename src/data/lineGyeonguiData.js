@@ -1,3 +1,7 @@
+/**
+ * 경의중앙선의 모든 지하철 역 정보들
+ * 화면에 보여줄 때 groupId와 orderId에 따라 보여주기 위함
+ */
 const LINE_GYEONGUI_DATA = [
   {
     groupName: "문산-가좌",
