@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Layout } from "./components/Layout";
 import { usePrefetchLine } from "./hooks/useLine";
-import Layout from "./Layout";
 import { LineDetail, Lines, Main } from "./pages";
 
 function App() {

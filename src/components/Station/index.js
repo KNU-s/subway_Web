@@ -1,12 +1,3 @@
-import Tracks from "../Tracks";
+import Station from "./Station";
 
-const Station = ({ stationName, trainInfo }) => {
-  return (
-    <div className="station_container">
-      <Tracks trainInfo={trainInfo} />
-      <div className="station_name">{stationName}</div>
-    </div>
-  );
-};
-
-export default Station;
+export { Station };

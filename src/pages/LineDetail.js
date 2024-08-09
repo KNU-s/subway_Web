@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import SectionList from "../components/SectionList";
+import { SectionList } from "../components/SectionList";
 import {
   useSelectLineName,
   useSetSelectLineId,
@@ -22,6 +22,10 @@ const LineDetail = () => {
   const [messages, loading, socketConnected] = useWebSocket(selectLineName); // lineName이 유효할 때만 useWebSocket을 호출한다
   const [latestMessage, setLatestMessage] = useState([]); // 소켓 마지막 메시지
   const [trainInfo, setTrainInfo] = useState({}); // 각 역에 매칭되는 모든 열차 배열들
+
+  useEffect(() => {
+    console.log("latestMessage", latestMessage);
+  }, [latestMessage]);
 
   /** currentLine 변수가 업데이트되면 속성 stations를 통해 역 정보 얻는다 */
   useEffect(() => {
