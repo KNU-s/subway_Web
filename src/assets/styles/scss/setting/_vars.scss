@@ -1,4 +1,11 @@
+/* SCSS 변수 설정 */
+
+$breakpoint-mobile: 540px; /* 모바일-태블릿 경계 너비 */
+$breakpoint-desktop: 1024px; /* 데스크탑-태블릿 경계 너비 */
+
 :root {
   --mainfont-pretendard: "Pretendard";
+
+  /* 폰트 세팅 */
   font-family: var(--mainfont-pretendard);
 }

@@ -32,20 +32,20 @@ const TrainInfo = ({ info }) => {
   const arvlStatus = info.arvlStatus; // arvlCd, 도착코드 (0:진입, 1:도착, 2:출발, 3:전역출발, 4:전역진입, 5:전역도착, 99:운행중)
   // arvlStatus에 따라 위치 다르게 표시하기
   return (
-    <div className="train_info_container">
-      <div className="train_icon_container">
+    <div className="train-info">
+      <div className="train-info__icon">
         {getTrainIcon(info.btrainSttus, info.updnLine)}
         <div
-          className={`train_info_box ${
+          className={`text-box ${
             info.updnLine === "상행" || info.updnLine === "내선"
-              ? "train_info_box_right"
-              : "train_info_box_left"
+              ? "text-box--right"
+              : "text-box--left"
           }`}
         >
-          <div className="train_info_text">{bstatnNm}</div>
-          <div className="train_info_text">{btrainNo}</div>
-          <div className="train_info_text">{arvlStatus}</div>
-          <div className="train_info_text">{arvlMsg}</div>
+          <div className="text-box__item">{bstatnNm}</div>
+          <div className="text-box__item">{btrainNo}</div>
+          <div className="text-box__item">{arvlStatus}</div>
+          <div className="text-box__item">{arvlMsg}</div>
         </div>
       </div>
     </div>

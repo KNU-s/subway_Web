@@ -27,7 +27,7 @@ const SectionList = ({ stationList, trainInfo }) => {
   }, [isGroup, stationList]);
 
   return (
-    <div>
+    <div className="section-list">
       {groupStationList.map((stationList, index) => (
         <Section key={index} stationList={stationList} trainInfo={trainInfo} />
       ))}

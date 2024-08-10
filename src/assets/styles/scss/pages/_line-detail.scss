@@ -1,0 +1,38 @@
+@import "../setting/mixins";
+
+.line-detail {
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    height: 80px;
+
+    position: relative; /* back-button을 가장 왼쪽에 배치하기 위함 */
+
+    &__back-button {
+      font-size: 24px;
+      color: #000000ab;
+      padding: 3px;
+
+      @include center-flex; /* SVG 아이콘을 가운데에 배치하기 위함 */
+
+      /* 버튼을 header에서 가장 왼쪽에 배치하기 위함 */
+      position: absolute;
+      left: 0px;
+
+      border-radius: 50%;
+
+      &:hover {
+        cursor: pointer;
+        color: #000000;
+        background-color: rgb(248, 248, 248);
+      }
+    }
+
+    &__title {
+      font-size: 24px;
+    }
+  }
+}

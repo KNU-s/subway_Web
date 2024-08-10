@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { GoChevronLeft } from "react-icons/go";
+import { Link, useParams } from "react-router-dom";
 import { SectionList } from "../components/SectionList";
 import {
   useSelectLineName,
@@ -8,6 +9,17 @@ import {
 } from "../context/useSelectLineStore";
 import { useLineById } from "../hooks/useLineById";
 import useWebSocket from "../hooks/useWebSocket";
+
+const Header = ({ selectLineName }) => {
+  return (
+    <div className="header">
+      <Link to={`/line`} className="header__back-button">
+        <GoChevronLeft />
+      </Link>
+      <h1 className="header__title">{selectLineName}</h1>
+    </div>
+  );
+};
 
 /** 현재 url의 lineId 값을 글로벌 변수 selectLineId로 저장 */
 const LineDetail = () => {
@@ -98,8 +110,9 @@ const LineDetail = () => {
   }, [lineId, setSelectLineId]);
 
   return (
-    <div className="subwaylinedetail">
-      <h1>{selectLineName}</h1>
+    <div className="line-detail">
+      <Header selectLineName={selectLineName} />
+      {/* <h1 className="line-detail__title">{selectLineName}</h1> */}
       {!socketConnected || loading ? (
         "정보를 불러오는 중입니다. 잠시만 기다려 주세요."
       ) : (

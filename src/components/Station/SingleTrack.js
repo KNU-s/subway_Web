@@ -6,12 +6,12 @@ import { TrainInfo } from "../TrainInfo";
 
 const SingleTrack = ({ direction, trainInfo = [] }) => {
   return (
-    <div className="track_line">
-      <div className="track_station_circle">
+    <div className="track">
+      <div className="direction__wrapper">
         {direction === "down" ? (
-          <MdOutlineKeyboardArrowDown className="track_direction_icon" />
+          <MdOutlineKeyboardArrowDown className="direction__icon" />
         ) : (
-          <MdOutlineKeyboardArrowUp className="track_direction_icon" />
+          <MdOutlineKeyboardArrowUp className="direction__icon" />
         )}
       </div>
       {trainInfo.map((info, index) => (

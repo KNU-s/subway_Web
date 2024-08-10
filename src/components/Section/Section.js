@@ -23,7 +23,7 @@ const Section = ({ stationList, trainInfo }) => {
   }, [stationList]);
 
   return (
-    <div className="main_body_container">
+    <div className="section">
       {isGroup && <SectionTitle sectionName={sectionName} />}
       {stationList.map((station) => {
         const { stationName } = station;

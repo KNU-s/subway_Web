@@ -5,7 +5,7 @@ import {
 } from "../context/useSelectLineStore";
 import { useLine } from "../hooks/useLine";
 
-const Lines = () => {
+const Content = () => {
   const { data: lineList } = useLine();
   const setSelectLineName = useSetSelectLineName();
   const setSelectLineId = useSetSelectLineId();
@@ -15,26 +15,38 @@ const Lines = () => {
     setSelectLineId(line.uniqueLineId);
     setSelectLineName(line.lineName);
   };
-
   return (
-    <div className="subwayline">
-      <h1 className="title">노선</h1>
-      <div className="line_container">
-        {lineList.map((line) => {
-          return (
-            <div key={line.uniqueLineId} className="line">
-              <Link
-                to={`/line/${line.uniqueLineId}`}
-                // state={{ line: line }}
-                className="line_title"
-                onClick={() => handleLinkClick(line)}
-              >
-                {line.lineName}
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+    <div className="lines__content">
+      {lineList.map((line) => {
+        return (
+          <div key={line.uniqueLineId}>
+            <Link
+              to={`/line/${line.uniqueLineId}`}
+              className="line__title"
+              onClick={() => handleLinkClick(line)}
+            >
+              {line.lineName}
+            </Link>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const Header = () => {
+  return (
+    <div className="lines__header">
+      <h1 className="lines__title">노선</h1>
+    </div>
+  );
+};
+
+const Lines = () => {
+  return (
+    <div className="lines">
+      <Header />
+      <Content />
     </div>
   );
 };

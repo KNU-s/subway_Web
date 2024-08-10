@@ -1,17 +1,31 @@
-.homepage {
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  .link {
+  &__title {
+    font-weight: 600;
+    margin-top: 200px;
+  }
+
+  &__sub-title {
+    font-size: 14px;
+    color: #818181;
+    margin-top: 5px;
+  }
+
+  &__all-lines-button {
     background-color: rgba(120, 120, 128, 0.12);
     padding: 10px 20px;
     color: #007aff;
     border-radius: 20px;
-  }
 
-  .link:hover {
-    text-decoration: underline;
+    margin-top: 30px;
+
+    &:hover {
+      color: #007aff;
+      text-decoration: underline;
+    }
   }
 }

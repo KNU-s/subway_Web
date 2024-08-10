@@ -1,0 +1,16 @@
+@import "../setting/mixins";
+
+.layout {
+  width: 430px;
+
+  margin-inline: auto;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  height: 100vh;
+  height: 100dvh;
+}
