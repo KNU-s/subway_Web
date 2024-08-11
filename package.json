@@ -21,6 +21,7 @@
   "scripts": {
     "start": "env-cmd -f .env.development react-scripts start",
     "start:https": "HTTPS=true SSL_CRT_FILE=./cert/localhost.pem SSL_KEY_FILE=./cert/localhost-key.pem env-cmd -f .env.development react-scripts start",
+    "start:inspect": "node --inspect ./node_modules/.bin/react-scripts start",
     "build": "HTTPS=true SSL_CRT_FILE=./cert/localhost.pem SSL_KEY_FILE=./cert/localhost-key.pem env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -42,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-private-property-in-object": "^7.24.7"
   }
 }
