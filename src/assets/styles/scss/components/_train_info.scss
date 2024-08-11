@@ -32,10 +32,6 @@
 
   width: 90px;
 
-  // @media screen and (max-width: 430px) {
-  //   display: none;
-  // }
-
   @include mobile {
     display: none;
   }
