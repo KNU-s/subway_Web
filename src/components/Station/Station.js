@@ -7,9 +7,9 @@ const StationTitle = ({ stationName }) => {
 const Station = ({ stationName, trainInfo }) => {
   return (
     <div className="station">
-      <SingleTrack direction="down" trainInfo={trainInfo["하행"]} />
+      <SingleTrack direction="하행" trainInfo={trainInfo["하행"]} />
       <StationTitle stationName={stationName} />
-      <SingleTrack direction="up" trainInfo={trainInfo["상행"]} />
+      <SingleTrack direction="상행" trainInfo={trainInfo["상행"]} />
     </div>
   );
 };

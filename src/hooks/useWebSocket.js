@@ -30,7 +30,7 @@ const useWebSocket = (lineName) => {
 
     // 소켓 연결 시
     webSocket.current.onopen = () => {
-      console.log(`[웹소켓 연결] ${lineName}`);
+      // console.log(`[웹소켓 연결] ${lineName}`);
       sendMessage(`${lineName}`); // 메시지 전송
       setSocketConnected(true);
     };
@@ -46,7 +46,7 @@ const useWebSocket = (lineName) => {
 
     // 소켓 해제 시 이벤트
     webSocket.current.onclose = () => {
-      console.log("[웹소켓 연결 해제]");
+      // console.log("[웹소켓 연결 해제]");
       setSocketConnected(false);
     };
 

@@ -7,46 +7,53 @@ const {
   TrainIconRegularUp,
 } = TrainIcons;
 
-const TrainInfo = ({ info }) => {
-  /** train 정보 바탕으로 아이콘 선택하기 */
-  const getTrainIcon = (trainStatus, updnLine) => {
-    if (trainStatus !== "급행") {
-      // btrainSttus === "일반" || "ITX"
-      if (updnLine === "상행" || updnLine === "내선") {
-        return <TrainIconRegularUp />;
-      } else if (updnLine === "하행" || updnLine === "외선") {
-        return <TrainIconRegularDown />;
-      }
-    } else {
-      if (updnLine === "상행" || updnLine === "내선") {
-        return <TrainIconExpressUp />;
-      } else if (updnLine === "하행" || updnLine === "외선") {
-        return <TrainIconExpressDown />;
-      }
-    }
+/* 열차의 종류(급행/일반)와 방향(상행/하행)에 따라 아이콘을 렌더링한다. */
+const TrainIcon = ({ btrainSttus, updnLine }) => {
+  const trainIcons = {
+    "급행-상행": TrainIconExpressUp,
+    "급행-하행": TrainIconExpressDown,
+    "일반-상행": TrainIconRegularUp,
+    "일반-하행": TrainIconRegularDown,
+    "ITX-상행": TrainIconRegularUp,
+    "ITX-하행": TrainIconRegularDown,
+    "특급-상행": TrainIconRegularUp,
+    "특급-하행": TrainIconRegularDown,
   };
 
-  const bstatnNm = info.bstatnNm; // 종착지하철역명
-  const btrainNo = info.btrainNo; // 열차번호(현재운행하고 있는 호선별 열차번호)
-  const arvlMsg = info.arvlMsg; // arvlMsg2, 첫번째도착메세지 (도착, 출발 , 진입 등)
-  const arvlStatus = info.arvlStatus; // arvlCd, 도착코드 (0:진입, 1:도착, 2:출발, 3:전역출발, 4:전역진입, 5:전역도착, 99:운행중)
-  // arvlStatus에 따라 위치 다르게 표시하기
+  const key = `${btrainSttus}-${updnLine}`;
+  const IconComponent = trainIcons[key];
+
+  return <IconComponent />;
+};
+
+const TrainInfoTextBox = ({
+  updnLine,
+  bstatnNm,
+  btrainNo,
+  arvlMsg,
+  arvlStatus,
+}) => {
+  const positionClass =
+    updnLine === "상행" || updnLine === "내선"
+      ? "text-box--right"
+      : "text-box--left";
+
+  return (
+    <div className={`text-box ${positionClass}`}>
+      <div className="text-box__item">{bstatnNm}</div>
+      <div className="text-box__item">{btrainNo}</div>
+      <div className="text-box__item">{arvlStatus}</div>
+      <div className="text-box__item">{arvlMsg}</div>
+    </div>
+  );
+};
+
+const TrainInfo = ({ info }) => {
   return (
     <div className="train-info">
       <div className="train-info__icon">
-        {getTrainIcon(info.btrainSttus, info.updnLine)}
-        <div
-          className={`text-box ${
-            info.updnLine === "상행" || info.updnLine === "내선"
-              ? "text-box--right"
-              : "text-box--left"
-          }`}
-        >
-          <div className="text-box__item">{bstatnNm}</div>
-          <div className="text-box__item">{btrainNo}</div>
-          <div className="text-box__item">{arvlStatus}</div>
-          <div className="text-box__item">{arvlMsg}</div>
-        </div>
+        <TrainIcon btrainSttus={info.btrainSttus} updnLine={info.updnLine} />
+        <TrainInfoTextBox {...info} />
       </div>
     </div>
   );

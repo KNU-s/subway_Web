@@ -4,16 +4,27 @@ import {
 } from "react-icons/md";
 import { TrainInfo } from "../TrainInfo";
 
-const SingleTrack = ({ direction, trainInfo = [] }) => {
+const DirectionIcon = ({ direction }) => {
+  const directionIcons = {
+    상행: MdOutlineKeyboardArrowUp,
+    하행: MdOutlineKeyboardArrowDown,
+  };
+
+  const IconComponent = directionIcons[direction];
+
   return (
-    <div className="track">
-      <div className="direction__wrapper">
-        {direction === "down" ? (
-          <MdOutlineKeyboardArrowDown className="direction__icon" />
-        ) : (
-          <MdOutlineKeyboardArrowUp className="direction__icon" />
-        )}
-      </div>
+    <div className="direction__wrapper">
+      <IconComponent className="direction__icon" />
+    </div>
+  );
+};
+
+const SingleTrack = ({ direction, trainInfo = [] }) => {
+  const trackDirectionClassName =
+    direction === "상행" || direction === "내선" ? "track--up" : "track--down";
+  return (
+    <div className={`track ${trackDirectionClassName}`}>
+      <DirectionIcon direction={direction} />
       {trainInfo.map((info, index) => (
         <TrainInfo info={info} key={index} />
       ))}
