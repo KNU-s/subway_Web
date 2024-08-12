@@ -14,6 +14,8 @@ const TrainIcon = ({ btrainSttus, updnLine }) => {
     "급행-하행": TrainIconExpressDown,
     "일반-상행": TrainIconRegularUp,
     "일반-하행": TrainIconRegularDown,
+    "일반-내선": TrainIconRegularUp,
+    "일반-외선": TrainIconRegularDown,
     "ITX-상행": TrainIconRegularUp,
     "ITX-하행": TrainIconRegularDown,
     "특급-상행": TrainIconRegularUp,
