@@ -1,0 +1,39 @@
+@import "../../setting/_mixins";
+
+.modal__background {
+  height: 100%;
+  width: 100%;
+
+  @include center-flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  text-align: center;
+  background-color: var(--fill-black-alpha);
+
+  cursor: pointer;
+}
+
+.modal__box {
+  width: 200px;
+  height: 300px;
+  background-color: white;
+  border-radius: 15px;
+
+  /* modal 안의 내용들을 세로로 가운데 배치 */
+  @include center-flex;
+  flex-direction: column;
+
+  /* close-button을 우상단에 배치하기 위함 */
+  position: relative;
+
+  cursor: default;
+}
+
+.modal__close-button {
+  @include button-styles(20px);
+
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}

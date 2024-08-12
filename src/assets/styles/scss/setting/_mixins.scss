@@ -29,3 +29,19 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin button-styles($font-size: 24px) {
+  font-size: $font-size;
+  color: var(--line-gray-first);
+  padding: 3px;
+
+  @include center-flex;
+
+  border-radius: 50%;
+
+  &:hover {
+    cursor: pointer;
+    color: #000000;
+    background-color: var(--fill-gray-first);
+  }
+}

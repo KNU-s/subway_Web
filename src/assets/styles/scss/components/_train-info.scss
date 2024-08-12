@@ -7,6 +7,8 @@
   /* icon을 균일하게 배치하기 위함 */
   width: 30px;
 
+  cursor: pointer;
+
   &__icon {
     /* train_info_box를 왼쪽 또는 오른쪽에 배치하기 위함 */
     position: relative;
@@ -18,16 +20,13 @@
   position: absolute;
   top: 0px;
 
-  /* 가려지지 않도록 상단에 배치 */
-  z-index: 99;
-
   display: inline-block;
   font-size: 11px;
 
   padding: 3px 5px;
-  background-color: #ffffff;
+  background-color: white;
   border-radius: 8px;
-  border: 1px solid #e4e4e4;
+  border: 1px solid var(--line-gray-second);
 
   /* [상행] train_info_box 오른쪽에 속성 추가 */
   &--right {

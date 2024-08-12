@@ -6,6 +6,15 @@ $breakpoint-desktop: 1024px; /* 데스크탑-태블릿 경계 너비 */
 :root {
   --mainfont-pretendard: "Pretendard";
 
+  --fill-black-alpha: #0000004d;
+  --fill-gray-first: #f5f5f5;
+
+  --line-gray-first: #6e6e73;
+  --line-gray-second: #e4e4e4;
+  --line-gray-third: #cccccc;
+
+  --track-default: #fcb726;
+
   /* 폰트 세팅 */
   font-family: var(--mainfont-pretendard);
 }

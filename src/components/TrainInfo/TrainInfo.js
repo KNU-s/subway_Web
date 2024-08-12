@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { TrainInfoModal } from "../TrainInfoModal";
 import TrainIcons from "./TrainIcons";
 
 const {
@@ -46,8 +48,19 @@ const DestinationBox = ({ updnLine, destination }) => {
 };
 
 const TrainInfo = ({ info }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleTrainClick = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
-    <div className="train-info">
+    <div className="train-info" onClick={handleTrainClick}>
+      {showModal && <TrainInfoModal closeModal={closeModal} info={info} />}
       <TrainIcon btrainSttus={info.btrainSttus} updnLine={info.updnLine} />
       <DestinationBox updnLine={info.updnLine} destination={info.bstatnNm} />
     </div>
