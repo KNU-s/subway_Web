@@ -23,27 +23,22 @@ const TrainIcon = ({ btrainSttus, updnLine }) => {
   const key = `${btrainSttus}-${updnLine}`;
   const IconComponent = trainIcons[key];
 
-  return <IconComponent />;
+  return (
+    <div className="train-info__icon">
+      <IconComponent />
+    </div>
+  );
 };
 
-const TrainInfoTextBox = ({
-  updnLine,
-  bstatnNm,
-  btrainNo,
-  arvlMsg,
-  arvlStatus,
-}) => {
+const DestinationBox = ({ updnLine, destination }) => {
   const positionClass =
     updnLine === "상행" || updnLine === "내선"
-      ? "text-box--right"
-      : "text-box--left";
+      ? "destination-box--right"
+      : "destination-box--left";
 
   return (
-    <div className={`text-box ${positionClass}`}>
-      <div className="text-box__item">{bstatnNm}</div>
-      <div className="text-box__item">{btrainNo}</div>
-      <div className="text-box__item">{arvlStatus}</div>
-      <div className="text-box__item">{arvlMsg}</div>
+    <div className={`destination-box ${positionClass}`}>
+      <div className="destination-box__item">{destination}</div>
     </div>
   );
 };
@@ -51,10 +46,8 @@ const TrainInfoTextBox = ({
 const TrainInfo = ({ info }) => {
   return (
     <div className="train-info">
-      <div className="train-info__icon">
-        <TrainIcon btrainSttus={info.btrainSttus} updnLine={info.updnLine} />
-        <TrainInfoTextBox {...info} />
-      </div>
+      <TrainIcon btrainSttus={info.btrainSttus} updnLine={info.updnLine} />
+      <DestinationBox updnLine={info.updnLine} destination={info.bstatnNm} />
     </div>
   );
 };

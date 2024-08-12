@@ -4,6 +4,9 @@
   /* track_line 위에서 자유롭게 움직이기 위함*/
   position: absolute;
 
+  /* icon을 균일하게 배치하기 위함 */
+  width: 30px;
+
   &__icon {
     /* train_info_box를 왼쪽 또는 오른쪽에 배치하기 위함 */
     position: relative;
@@ -11,46 +14,33 @@
 }
 
 /* 상하행에 따라 왼쪽 또는 오른쪽 배치해야 함 */
-.text-box {
-  /* train_icon_container 안에서 아이콘 오른쪽에 배치하기 위함 */
+.destination-box {
   position: absolute;
-  top: -13px;
+  top: 0px;
 
   /* 가려지지 않도록 상단에 배치 */
   z-index: 99;
 
-  /* train_info을 세로로 배치하기 위함 */
   display: inline-block;
-  flex-direction: column;
-  align-items: flex-start;
-  font-size: 13px;
+  font-size: 11px;
 
   padding: 3px 5px;
   background-color: #ffffff;
   border-radius: 8px;
   border: 1px solid #e4e4e4;
 
-  width: 90px;
-
-  @include mobile {
-    display: none;
-  }
-
   /* [상행] train_info_box 오른쪽에 속성 추가 */
   &--right {
-    left: 20px;
+    left: 28px;
   }
 
   /* [하행] train_info_box 왼쪽에 속성 추가 */
   &--left {
-    right: 20px;
+    right: 28px;
   }
 
   &__item {
-    white-space: normal; /* 부모 길이에 맞춰 줄바꿈 */
-
-    // white-space: nowrap;
-    // overflow: hidden;
-    // text-overflow: ellipsis;
+    width: max-content; /* 컨텐츠에 맞게 너비 설정 */
+    max-width: 60px; /* 최대 너비 제한 */
   }
 }
