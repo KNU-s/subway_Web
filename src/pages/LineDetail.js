@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { GoChevronLeft } from "react-icons/go";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { SectionList } from "../components/SectionList";
 import {
   useSelectLineName,
@@ -11,11 +11,16 @@ import { useLineById } from "../hooks/useLineById";
 import useWebSocket from "../hooks/useWebSocket";
 
 const Header = ({ selectLineName }) => {
+  const navigate = useNavigate();
+  const handleBackButtonClick = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="header">
-      <Link to={`/`} className="header__back-button">
+      <div className="header__back-button" onClick={handleBackButtonClick}>
         <GoChevronLeft />
-      </Link>
+      </div>
       <h1 className="header__title">{selectLineName}</h1>
     </div>
   );
