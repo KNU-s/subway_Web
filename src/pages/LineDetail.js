@@ -13,7 +13,7 @@ import useWebSocket from "../hooks/useWebSocket";
 const Header = ({ selectLineName }) => {
   return (
     <div className="header">
-      <Link to={`/line`} className="header__back-button">
+      <Link to={`/`} className="header__back-button">
         <GoChevronLeft />
       </Link>
       <h1 className="header__title">{selectLineName}</h1>
