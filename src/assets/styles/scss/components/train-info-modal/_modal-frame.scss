@@ -3,6 +3,7 @@
 .modal__background {
   height: 100%;
   width: 100%;
+  z-index: 1000; /* modal 최상위 배치 */
 
   @include center-flex;
   position: fixed;
