@@ -38,6 +38,9 @@ const getLineList = (rawData) => {
   /** 경의중앙선의 경우, stations 값에 상수데이터를 추가한다 */
   lines["경의중앙선"].stations = LINE_GYEONGUI_DATA;
 
+  /* 8호선의 경우, stationId로 오름차순으로 정렬한다 */
+  lines["8호선"].stations.sort((a, b) => (a.stationId > b.stationId ? 1 : -1));
+
   // 가공된 노선 정보를 배열로 반환
   return Object.values(lines);
 };
