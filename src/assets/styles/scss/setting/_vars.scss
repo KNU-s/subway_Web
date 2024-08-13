@@ -1,4 +1,4 @@
-/* SCSS 변수 설정 */
+/* 변수 설정 */
 
 $breakpoint-mobile: 540px; /* 모바일-태블릿 경계 너비 */
 $breakpoint-desktop: 1024px; /* 데스크탑-태블릿 경계 너비 */
@@ -14,6 +14,25 @@ $breakpoint-desktop: 1024px; /* 데스크탑-태블릿 경계 너비 */
   --line-gray-third: #cccccc;
 
   --track-default: #fcb726;
+
+  --subway-line1-color: #0052a4;
+  --subway-line2-color: #00a84d;
+  --subway-line3-color: #ef7c1c;
+  --subway-line4-color: #00a4e3;
+  --subway-line5-color: #996cac;
+  --subway-line6-color: #cd7c2f;
+  --subway-line7-color: #747f00;
+  --subway-line8-color: #e6186c;
+  --subway-line9-color: #bdb092;
+  --subway-gtxa-color: #9a6292;
+  --subway-gyeongui-color: #77c4a3;
+  --subway-airport-color: #0090d2;
+  --subway-gyeongchun-color: #178c72;
+  --subway-suinbundang-color: #fabe00;
+  --subway-shinbundang-color: #d31145;
+  --subway-gyeonggang-color: #0054a6;
+  --subway-uisinseol-color: #b7c450;
+  --subway-seohae-color: #8fc31f;
 
   /* 폰트 세팅 */
   font-family: var(--mainfont-pretendard);
