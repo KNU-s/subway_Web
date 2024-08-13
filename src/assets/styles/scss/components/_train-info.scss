@@ -3,16 +3,43 @@
 .train-info {
   /* track_line 위에서 자유롭게 움직이기 위함*/
   position: absolute;
+  // position: relative;
 
   /* icon을 균일하게 배치하기 위함 */
   width: 30px;
 
   cursor: pointer;
 
-  &__icon {
-    /* train_info_box를 왼쪽 또는 오른쪽에 배치하기 위함 */
-    position: relative;
+  /* 열차 위치 디테일하게 조정하기 위함 */
+  &__up {
+    &--approach {
+      top: 32px;
+    }
+    &--depart {
+      top: 0px;
+    }
+    &--next-approach {
+      top: -10px;
+    }
   }
+
+  &__down {
+    &--approach {
+      top: 0px;
+    }
+    &--depart {
+      top: 32px;
+    }
+    &--next-approach {
+      /* 가려짐 */
+      top: 40px;
+      z-index: 1;
+    }
+  }
+}
+
+.train-icon {
+  @include center-flex;
 }
 
 /* 상하행에 따라 왼쪽 또는 오른쪽 배치해야 함 */

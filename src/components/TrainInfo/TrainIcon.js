@@ -25,7 +25,7 @@ const TrainIcon = ({ info }) => {
   const IconComponent = trainIcons[key];
 
   return (
-    <div className="train-info__icon">
+    <div className="train-icon">
       <IconComponent />
     </div>
   );
