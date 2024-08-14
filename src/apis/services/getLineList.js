@@ -41,6 +41,11 @@ const getLineList = (rawData) => {
   /* 8호선의 경우, stationId로 오름차순으로 정렬한다 */
   lines["8호선"].stations.sort((a, b) => (a.stationId > b.stationId ? 1 : -1));
 
+  /* 2호선-(지선-신설동)의 경우, stationId로 오름차순으로 정렬한다 */
+  lines["2호선-(지선-신설동)"].stations.sort((a, b) =>
+    a.stationId > b.stationId ? 1 : -1
+  );
+
   // 가공된 노선 정보를 배열로 반환
   return Object.values(lines);
 };
