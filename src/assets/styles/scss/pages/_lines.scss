@@ -1,3 +1,5 @@
+@import "../setting/_vars";
+
 .lines {
   &__header {
     display: flex;
@@ -12,19 +14,37 @@
     font-size: 24px;
   }
 
-  &__content {
+  &__list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 35px 60px;
+    gap: 15px 20px;
 
     padding-top: 20px;
+    padding-bottom: 40px;
   }
 }
 
-.line {
-  &__title {
-    &:hover {
-      text-decoration: underline;
+.line-item {
+  @include center-flex;
+  flex-direction: column;
+  padding: 17px 10px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: white;
+
+  &__thumb {
+    position: absolute;
+    height: 8px;
+    width: 100%;
+    bottom: 0px;
+  }
+}
+
+@each $lineId, $color in $subway-line-colors {
+  .line-item__#{$lineId} {
+    .line-item__thumb {
+      background-color: rgba($color, 0.5);
     }
   }
 }

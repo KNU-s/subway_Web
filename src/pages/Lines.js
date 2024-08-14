@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   useSetSelectLineId,
@@ -5,31 +6,42 @@ import {
 } from "../context/useSelectLineStore";
 import { useLine } from "../hooks/useLine";
 
-const Content = () => {
-  const { data: lineList } = useLine();
+const LineItem = ({ line }) => {
   const setSelectLineName = useSetSelectLineName();
   const setSelectLineId = useSetSelectLineId();
 
+  /* 해당 link 속성들 전역변수로 저장 */
   const handleLinkClick = (line) => {
-    // 해당 link 속성들 전역변수로 저장
     setSelectLineId(line.uniqueLineId);
     setSelectLineName(line.lineName);
   };
+
+  const lineIdClass = `${line.lineId}`;
+
   return (
-    <div className="lines__content">
-      {lineList.map((line) => {
-        return (
-          <div key={line.uniqueLineId}>
-            <Link
-              to={`/line/${line.uniqueLineId}`}
-              className="line__title"
-              onClick={() => handleLinkClick(line)}
-            >
-              {line.lineName}
-            </Link>
-          </div>
-        );
-      })}
+    <Link
+      to={`/line/${line.uniqueLineId}`}
+      className={`line-item line-item__${lineIdClass}`}
+      onClick={() => handleLinkClick(line)}
+    >
+      {line.lineName}
+      <div className={`line-item__thumb`} />
+    </Link>
+  );
+};
+
+const Content = () => {
+  const { data: lineList } = useLine();
+
+  useEffect(() => {
+    console.log("lineList", lineList);
+  }, [lineList]);
+
+  return (
+    <div className="lines__list">
+      {lineList.map((line) => (
+        <LineItem key={line.uniqueLineId} line={line} />
+      ))}
     </div>
   );
 };
