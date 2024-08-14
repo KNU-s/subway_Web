@@ -78,8 +78,8 @@ const LineDetail = () => {
         let { statnNm, updnLine } = train;
 
         /** 2호선 내선, 외선 에외 처리 */
-        if (updnLine === "내선") updnLine = "상행";
-        else if (updnLine === "외선") updnLine = "하행";
+        if (updnLine === "외선") updnLine = "상행";
+        else if (updnLine === "내선") updnLine = "하행";
 
         // statnNm 또는 updnLine에 매칭되는 역이 없는 열차의 예외 상황 처리
         try {

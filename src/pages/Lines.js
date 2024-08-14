@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   useSetSelectLineId,
@@ -32,10 +31,6 @@ const LineItem = ({ line }) => {
 
 const Content = () => {
   const { data: lineList } = useLine();
-
-  useEffect(() => {
-    console.log("lineList", lineList);
-  }, [lineList]);
 
   return (
     <div className="lines__list">

@@ -21,7 +21,7 @@ const DirectionIcon = ({ direction }) => {
 
 const SingleTrack = ({ direction, trainInfo = [] }) => {
   const trackDirectionClassName =
-    direction === "상행" || direction === "내선" ? "track--up" : "track--down";
+    direction === "상행" || direction === "외선" ? "track--up" : "track--down";
   return (
     <div className={`track ${trackDirectionClassName}`}>
       <DirectionIcon direction={direction} />

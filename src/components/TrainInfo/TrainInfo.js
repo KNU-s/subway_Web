@@ -4,7 +4,7 @@ import TrainIcon from "./TrainIcon";
 
 const DestinationBox = ({ updnLine, destination }) => {
   const positionClass =
-    updnLine === "상행" || updnLine === "내선"
+    updnLine === "상행" || updnLine === "외선"
       ? "destination-box--right"
       : "destination-box--left";
 
@@ -83,7 +83,7 @@ const TrainInfo = ({ info }) => {
 
   /* info에 따라 열차 위치 디테일하게 조정하기 위함 */
   const positionClass = {
-    updn: info.updnLine === "상행" || info.updnLine === "내선" ? "up" : "down",
+    updn: info.updnLine === "상행" || info.updnLine === "외선" ? "up" : "down",
     status: getStatus(info),
   };
 
