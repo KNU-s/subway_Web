@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 /**
  * 지하철 노선 번호를 받아서 해당 노선 열차의 실시간 정보와 로딩 중인지 반환한다
@@ -22,9 +22,7 @@ const useWebSocket = (lineName) => {
     }
   };
 
-  useEffect(() => {
-    if (!lineName) return; // lineName이 설정된 후에만 웹소켓 연결을 시도
-
+  const connectWebSocket = useCallback(() => {
     // WebSocket 연결 초기화
     webSocket.current = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
 
@@ -46,18 +44,14 @@ const useWebSocket = (lineName) => {
 
     // 소켓 해제 시 이벤트
     webSocket.current.onclose = () => {
-      // console.log("[웹소켓 연결 해제]");
       setSocketConnected(false);
+      setTimeout(() => connectWebSocket(), 1000);
     };
 
     webSocket.current.onerror = (error) => {
       console.log("[웹소켓 에러]", error);
       setLoading(false);
       setSocketConnected(false);
-    };
-
-    return () => {
-      webSocket.current?.close();
     };
   }, [lineName]);
 
@@ -72,6 +66,16 @@ const useWebSocket = (lineName) => {
       );
     }
   };
+
+  useEffect(() => {
+    if (!lineName) return; // lineName이 설정된 후에만 웹소켓 연결을 시도
+
+    connectWebSocket();
+
+    return () => {
+      webSocket.current?.close();
+    };
+  }, [lineName, connectWebSocket]);
 
   return [messages, loading, socketConnected];
 };
