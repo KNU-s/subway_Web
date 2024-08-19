@@ -75,11 +75,15 @@ const LineDetail = () => {
       });
 
       latestMessage.forEach((train) => {
-        let { statnNm, updnLine } = train;
+        let { statnNm, updnLine, bstatnNm } = train;
 
         /** 2호선 내선, 외선 에외 처리 */
         if (updnLine === "외선") updnLine = "상행";
         else if (updnLine === "내선") updnLine = "하행";
+
+        /* 종점이 stationList에 속하지 않는 경우 해당 열차를 제외하고 다음 열차로 넘어감 */
+        if (!stationList.some((station) => station.stationName === bstatnNm))
+          return;
 
         // statnNm 또는 updnLine에 매칭되는 역이 없는 열차의 예외 상황 처리
         try {
