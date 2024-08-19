@@ -38,13 +38,12 @@ const getLineList = (rawData) => {
   /** 경의중앙선의 경우, stations 값에 상수데이터를 추가한다 */
   lines["경의중앙선"].stations = LINE_GYEONGUI_DATA;
 
-  /* 8호선의 경우, stationId로 오름차순으로 정렬한다 */
-  lines["8호선"].stations.sort((a, b) => (a.stationId > b.stationId ? 1 : -1));
-
-  /* 2호선-(지선-신설동)의 경우, stationId로 오름차순으로 정렬한다 */
-  lines["2호선-(지선-신설동)"].stations.sort((a, b) =>
-    a.stationId > b.stationId ? 1 : -1
-  );
+  /* 경의중앙선을 제외한 모든 노선에 대해 order 기준으로 오름차순 정렬한다 */
+  Object.keys(lines).forEach((lineName) => {
+    if (lineName !== "경의중앙선") {
+      lines[lineName].stations.sort((a, b) => a.order - b.order);
+    }
+  });
 
   // 가공된 노선 정보를 배열로 반환
   return Object.values(lines);
