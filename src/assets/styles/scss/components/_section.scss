@@ -2,4 +2,16 @@
 
 .section {
   display: grid;
+
+  &--title {
+    background-color: var(--line-gray-second);
+    border-radius: 10px;
+    padding: 5px 15px;
+
+    display: flex;
+    flex-direction: row;
+
+    font-size: 12px;
+    color: var(--line-gray-first);
+  }
 }

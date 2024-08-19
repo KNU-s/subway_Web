@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Station } from "../Station";
 
 const SectionTitle = ({ sectionName }) => {
-  return <div>{sectionName}</div>;
+  return <div className="section--title">{sectionName}</div>;
 };
 
 /**
