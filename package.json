@@ -5,7 +5,6 @@
   "dependencies": {
     "@tanstack/react-query": "^5.51.16",
     "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
     "env-cmd": "^10.1.0",
@@ -23,6 +22,7 @@
     "start:https": "HTTPS=true SSL_CRT_FILE=./cert/localhost.pem SSL_KEY_FILE=./cert/localhost-key.pem env-cmd -f .env.development react-scripts start",
     "start:inspect": "node --inspect ./node_modules/.bin/react-scripts start",
     "build": "HTTPS=true SSL_CRT_FILE=./cert/localhost.pem SSL_KEY_FILE=./cert/localhost-key.pem env-cmd -f .env.production react-scripts build",
+    "test:ignore": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -46,6 +46,14 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/plugin-transform-private-property-in-object": "^7.24.7"
+    "@babel/plugin-transform-private-property-in-object": "^7.24.7",
+    "@babel/preset-env": "^7.25.3",
+    "@testing-library/react": "^16.0.0",
+    "babel-jest": "^29.7.0"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)"
+    ]
   }
 }
