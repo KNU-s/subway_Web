@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { usePrefetchLine } from "./hooks/useLine";
-import routesConfig from "./routesConfig";
+import routesConfig from "./routes/routesConfig";
 
 const router = createBrowserRouter(routesConfig);
 
