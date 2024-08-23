@@ -11,6 +11,7 @@ const getLineList = (rawData) => {
 
   rawData.forEach((station) => {
     const {
+      order,
       stationId,
       stationName,
       stationLine: lineName,
@@ -20,6 +21,7 @@ const getLineList = (rawData) => {
     // 자히철 노선 정보 추가하기
     if (!lines[lineName]) {
       lines[lineName] = {
+        order,
         lineName,
         lineId,
         uniqueLineId,
@@ -30,6 +32,7 @@ const getLineList = (rawData) => {
 
     // 노선에 따른 역 정보 추가하기
     lines[lineName].stations.push({
+      order,
       stationId,
       stationName,
     });
