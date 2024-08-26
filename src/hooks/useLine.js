@@ -1,16 +1,10 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import getStation from "../apis/api/getStation";
-import getLineList from "../apis/services/getLineList";
-
-const fetchLine = async () => {
-  const rawData = await getStation();
-  return getLineList(rawData);
-};
+import { getLineList } from "../apis/services/stationInfoService";
 
 export const useLine = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["line"],
-    queryFn: fetchLine,
+    queryFn: getLineList,
   });
 
   if (isLoading) {
@@ -35,6 +29,6 @@ export const usePrefetchLine = () => {
   const queryClient = useQueryClient();
   queryClient.prefetchQuery({
     queryKey: ["line"],
-    queryFn: fetchLine,
+    queryFn: getLineList,
   });
 };
