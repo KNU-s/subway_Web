@@ -18,6 +18,7 @@ const getData = async <T>(
       status: response.status,
     };
   } catch (error) {
+    console.error(error);
     return {
       data: {} as T,
       status: 500,

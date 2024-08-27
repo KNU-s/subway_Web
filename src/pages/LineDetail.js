@@ -36,7 +36,7 @@ const LineDetail = () => {
   const setSelectLineName = useSetSelectLineName(); // curentLine의 lineName 속성 값
   const selectLineName = useSelectLineName(); // 타이틀 및 웹소켓 인자로 사용하기 위함
 
-  const [messages, loading, socketConnected] = useWebSocket(selectLineName); // lineName이 유효할 때만 useWebSocket을 호출한다
+  const [messages, loading] = useWebSocket(selectLineName); // lineName이 유효할 때만 useWebSocket을 호출한다
   const [latestMessage, setLatestMessage] = useState([]); // 소켓 마지막 메시지
   const [trainInfo, setTrainInfo] = useState({}); // 각 역에 매칭되는 모든 열차 배열들
 
@@ -118,7 +118,7 @@ const LineDetail = () => {
     <div className="line-detail">
       <Header selectLineName={selectLineName} />
       {/* <h1 className="line-detail__title">{selectLineName}</h1> */}
-      {!socketConnected || loading ? (
+      {loading ? (
         "정보를 불러오는 중입니다. 잠시만 기다려 주세요."
       ) : (
         <SectionList stationList={stationList} trainInfo={trainInfo} />
