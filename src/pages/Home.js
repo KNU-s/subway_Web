@@ -49,7 +49,7 @@ const Header = () => {
   );
 };
 
-const Lines = () => {
+const Home = () => {
   return (
     <div className="lines">
       <Header />
@@ -58,4 +58,4 @@ const Lines = () => {
   );
 };
 
-export default Lines;
+export default Home;

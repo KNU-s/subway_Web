@@ -1,4 +1,4 @@
+import Home from "./Home";
 import LineDetail from "./LineDetail";
-import Lines from "./Lines";
 
-export { LineDetail, Lines };
+export { Home, LineDetail };

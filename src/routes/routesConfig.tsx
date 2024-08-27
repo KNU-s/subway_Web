@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { Layout } from "../components/Layout";
-import { LineDetail, Lines } from "../pages";
+import { Home, LineDetail } from "../pages";
 
 const routesConfig = [
   {
@@ -9,7 +9,7 @@ const routesConfig = [
     children: [
       {
         index: true,
-        element: <Lines />,
+        element: <Home />,
       },
       {
         path: "/line/:lineId",
