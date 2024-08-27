@@ -3,14 +3,18 @@ import {
   useSetSelectLineId,
   useSetSelectLineName,
 } from "../context/useSelectLineStore";
-import { useLine } from "../hooks/useLine";
+import { Line } from "../types/line";
 
-const LineItem = ({ line }) => {
+interface LineItemProps {
+  line: Line;
+}
+
+const LineItem = ({ line }: LineItemProps) => {
   const setSelectLineName = useSetSelectLineName();
   const setSelectLineId = useSetSelectLineId();
 
   /* 해당 link 속성들 전역변수로 저장 */
-  const handleLinkClick = (line) => {
+  const handleLinkClick = (line: Line) => {
     setSelectLineId(line.uniqueLineId);
     setSelectLineName(line.lineName);
   };
@@ -29,33 +33,4 @@ const LineItem = ({ line }) => {
   );
 };
 
-const Content = () => {
-  const { data: lineList } = useLine();
-
-  return (
-    <div className="lines__list">
-      {lineList.map((line) => (
-        <LineItem key={line.uniqueLineId} line={line} />
-      ))}
-    </div>
-  );
-};
-
-const Header = () => {
-  return (
-    <div className="lines__header">
-      <h1 className="lines__title">노선</h1>
-    </div>
-  );
-};
-
-const Home = () => {
-  return (
-    <div className="lines">
-      <Header />
-      <Content />
-    </div>
-  );
-};
-
-export default Home;
+export default LineItem;
