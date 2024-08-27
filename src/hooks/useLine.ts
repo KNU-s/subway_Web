@@ -1,14 +1,20 @@
+import { LineList } from "@/types/line";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getLineList } from "../apis/services/stationInfoService";
 
-export const useLine = () => {
+interface UseLineResult {
+  data: LineList;
+  isLoading: boolean;
+  error: Error | null;
+}
+
+export const useLine = (): UseLineResult => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["line"],
     queryFn: getLineList,
   });
 
   if (isLoading) {
-    // console.log("[useLine] loading");
     return { data: [], isLoading: true, error: null };
   }
 
