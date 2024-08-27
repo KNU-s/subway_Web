@@ -1,22 +1,6 @@
+import { StationList } from "@/types/station";
 import LINE_GYEONGUI_DATA from "../../data/lineGyeonguiData";
 import getData from "../api/getData";
-
-interface Station {
-  order: number; // 역 배치 순서 (오름차순 정렬)
-  stationId: string; // 숫자로만 이루어진 역 고유 ID
-  stationName: string; // 역 이름
-
-  /* 선택 사항 */
-  stationLine?: string; // 노선 이름
-  id?: string; // 알파벳과 숫자로 이루어진 역 고유 ID
-  stationLineId?: number;
-
-  /* 그룹(section)이 있는 경의중앙선에만 해당 */
-  groupId?: number;
-  groupName?: string;
-}
-
-type StationList = Station[];
 
 interface Line {
   uniqueLineId: number; // url 매칭을 위한 노선 고유 번호
