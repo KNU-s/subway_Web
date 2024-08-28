@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+# [열차영차](http://www.livesubway.site)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="./public/logo192.png" alt="Project Icon" width="100" height="100">
 
-## Available Scripts
+## 프로젝트 소개
 
-In the project directory, you can run:
+### 목적
 
-### `npm start`
+실시간으로 지하철 위치를 확인할 수 있는 웹 서비스를 제공하여 사용자의 불편함을 해소하는 것을 목표로 합니다. 지하철 위치와 상태를 실시간으로 파악하믕로써 보다 편리하고 안전한 지하철 이용을 지원합니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 개발 기간
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2024년 7월 ~ 2024년 8월
 
-### `npm test`
+## 관련 링크
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 배포 주소
 
-### `npm run build`
+- 웹사이트: [www.livesubway.site](http://www.livesubway.site)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 레포지토리
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Frontend: [Frontend GitHub Repository](https://github.com/KNU-s/subway_Web)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Backend: [Backend GitHub Repository](https://github.com/KNU-s/subway_BackEnd)
 
-### `npm run eject`
+## 주요 기능 및 시연
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| **화면**        | **설명**                                                                                   | **시연**                                                                                             |
+| --------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
+| **메인 화면**   | 전체 지하철 노선을 한눈에 확인할 수 있습니다.                                              | ![메인 화면 시연](https://github.com/user-attachments/assets/2766c2fe-2527-4e65-b103-0b4dd46326e9)   |
+| **노선별 화면** | 각 노선의 지하철 위치를 실시간으로 확인하고, 선택한 열차의 상세 정보를 확인할 수 있습니다. | ![노선별 화면 시연](https://github.com/user-attachments/assets/1a73116b-ae21-48eb-b3d1-3303ce089f87) |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **실시간 지하철 위치 확인**: 공공 API를 사용하여 실시간으로 지하철 열차의 위치를 보여줍니다.
+- **노선별 위치 추적**: 사용자는 특정 노선을 선택하여 해당하는 모든 열차의 현재 위치를 확인할 수 있습니다.
+- **열차 정보 제공**: 특정 열차를 클릭하면 해당 열차의 행선지, 번호, 위치를 포함한 상태를 상세히 확인할 수 있습니다.
+- **자동 상태 갱신**: 소켓을 통해 실시간 데이터를 받아 5초마다 열차 상태를 자동으로 갱신합니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 개발 환경
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| **카테고리** | **기술 스택**                                                                      |
+| ------------ | ---------------------------------------------------------------------------------- |
+| Frontend     | Javascript, React, Typescript(현재 마이그레이션 중), Zustand, Sass, Tanstack Query |
+| Backend      | Java 17, SpringBoot 3.x, WebSocket, Async, MongoDB                                 |
+| Infra        | AWS EC2, GitWebHook, Jenkins, Docker, Nginx                                        |
 
-## Learn More
+## 기여한 부분
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **프론트엔드 개발 및 실시간 통신 기능 구현**: 사용자 인터페이스를 구현하고, React 및 Typescript를 활용하여 동적인 웹 애플리케이션을 개발했습니다. 실시간 열차 정보 제공 및 자동 상태 갱신 기능을 구현하고, Zustand를 사용하여 전역 상태를 관리했습니다.
+- **디자인 및 기능 구현**: 메인 화면과 노선별 화면을 디자인하고, Sass를 사용한 스타일링을 담당했습니다
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 디렉토리 구조
 
-### Code Splitting
+```
+├── apis
+│   ├── api
+│   ├── services
+│   └── utils
+├── assets
+│   ├── images
+│   └── styles
+│       └── scss
+│           ├── components
+│           ├── pages
+│           └── setting
+├── components
+│   ├── Layout
+│   ├── Line
+│   ├── Section
+│   ├── SectionList
+│   ├── Station
+│   ├── TrainInfo
+│   └── TrainInfoModal
+├── context
+├── data
+├── hooks
+├── pages
+├── routes
+└── types
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 팀원 구성
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Frontend                               | Backend, Infra                             |
+| -------------------------------------- | ------------------------------------------ |
+| [@gaeguul](https://github.com/gaeguul) | [@JShistory](https://github.com/JShistory) |
