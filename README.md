@@ -1,4 +1,4 @@
-# [열차영차](http://www.livesubway.site)
+# [열차영차](https://livesubway.site)
 
 <img src="./public/logo192.png" alt="Project Icon" width="100" height="100">
 
@@ -16,7 +16,7 @@
 
 ### 배포 주소
 
-- 웹사이트: [www.livesubway.site](http://www.livesubway.site)
+- 웹사이트: [www.livesubway.site](http://livesubway.site)
 
 ### 레포지토리
 
