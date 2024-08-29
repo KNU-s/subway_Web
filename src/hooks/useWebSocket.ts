@@ -1,24 +1,13 @@
+import { Message } from "@/types/webSocket";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-interface Message {
-  arvlMsg: string;
-  arvlStatus: string;
-  bstatnNm: string;
-  btrainNo: string;
-  btrainSttus: string;
-  statnFNm: string;
-  statnNm: string;
-  statnTNm: string;
-  updnLine: string;
-}
-
-type LoadingState = boolean;
-type UseWebSocket = (lineName: string) => [Message[], LoadingState];
+export type LoadingState = boolean;
+export type UseWebSocket = (lineName: string) => [Message, LoadingState];
 
 /* 지하철 노선 번호를 받아서 해당 노선 열차의 실시간 정보와 로딩 중인지 반환한다 */
 const useWebSocket: UseWebSocket = (lineName) => {
   const [loading, setLoading] = useState(true);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [message, setMessage] = useState<Message>([]);
   const webSocket = useRef<WebSocket | null>(null); // 소켓을 저장할 인스턴스 변수
 
   const connectWebSocket = useCallback(() => {
@@ -60,7 +49,7 @@ const useWebSocket: UseWebSocket = (lineName) => {
 
       try {
         const data = JSON.parse(message);
-        setMessages((prev) => [...prev, data]);
+        setMessage(data);
         setLoading(false);
       } catch (error) {
         console.error("Failed to parse JSON message:", error);
@@ -88,7 +77,7 @@ const useWebSocket: UseWebSocket = (lineName) => {
     };
   }, [lineName, connectWebSocket]);
 
-  return [messages, loading];
+  return [message, loading];
 };
 
 export default useWebSocket;
