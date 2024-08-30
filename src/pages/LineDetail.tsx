@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Header from "../components/Header";
+import { Header } from "../components/Header";
 import { SectionList } from "../components/SectionList";
 import {
   useSelectLineName,
@@ -10,17 +10,7 @@ import {
 import { useLineById } from "../hooks/useLineById";
 import useWebSocket from "../hooks/useWebSocket";
 import { Station } from "../types/station";
-import { TrainInfoItem } from "../types/trainInfo";
-
-interface TrainInfoAtStation {
-  [direction: string]: TrainInfoItem[];
-  상행: TrainInfoItem[];
-  하행: TrainInfoItem[];
-}
-
-interface TrainInfo {
-  [stationName: string]: TrainInfoAtStation;
-}
+import { TrainInfo } from "../types/trainInfo";
 
 type Direction = "상행" | "하행";
 
