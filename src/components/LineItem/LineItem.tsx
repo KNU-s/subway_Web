@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import {
   useSetSelectLineId,
   useSetSelectLineName,
-} from "../context/useSelectLineStore";
-import { Line } from "../types/line";
+} from "../../context/useSelectLineStore";
+import { Line } from "../../types/line";
 
 interface LineItemProps {
   line: Line;

@@ -1,4 +1,4 @@
-import LineItem from "../components/LineItem";
+import { LineItem } from "../components/LineItem";
 import { useLine } from "../hooks/useLine";
 
 const Content = () => {
