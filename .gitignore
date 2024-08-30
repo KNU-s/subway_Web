@@ -29,3 +29,5 @@ yarn-error.log*
 
 # ssl certification
 cert
+
+.next
