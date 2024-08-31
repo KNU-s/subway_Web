@@ -6,6 +6,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  sassOptions: {
+    includePaths: ['styles'],
+  },
 };
 
 export default nextConfig;

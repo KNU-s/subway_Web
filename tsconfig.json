@@ -3,23 +3,11 @@
   "compilerOptions": {
     "target": "ES2020", // TypeScript 코드를 JavaScript로 변환할 때 어떤 ECMAScript 버전의 문법을 사용할지 결정한다.
     "module": "ESNext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "jsx": "preserve",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@apis/*": [
-        "apis/*"
-      ]
+      "@/*": ["*"]
     },
     "resolveJsonModule": true,
     "allowJs": true,
@@ -32,24 +20,15 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "incremental": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
     // "checkJs": true,
     // "typeRoots": ["./node_modules/@types", "types"],
-    ,
     "plugins": [
       {
         "name": "next"
       }
     ]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "next.config.mjs",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.mjs", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
