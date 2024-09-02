@@ -22,7 +22,7 @@ const HomePage = ({ lineInfo }: HomePageProps) => {
   return (
     <div className="home">
       <Header />
-      <LineList />
+      <LineList lineInfo={lineInfo} />
     </div>
   );
 };

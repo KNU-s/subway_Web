@@ -1,10 +1,16 @@
-const LineList = () => {
-  // 모든 노선 가져오기
+import { LineItem } from '@/components/LineItem';
+import { Line } from '@/types/line';
+
+type LineListProps = {
+  lineInfo: Line[];
+};
+
+const LineList = ({ lineInfo }: LineListProps) => {
   return (
-    <div className="line-list">
-      {/* {lineList.map((line) => (
-          <LineItem key={line.uniqueLineId} line={line} />
-        ))} */}
+    <div className="home__line-list">
+      {lineInfo.map((line) => (
+        <LineItem key={line.lineUrlId} line={line} />
+      ))}
     </div>
   );
 };

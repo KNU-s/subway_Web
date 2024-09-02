@@ -1,3 +1,5 @@
+@import '../setting/_mixins';
+
 .home {
   &__header {
     display: flex;
@@ -6,5 +8,43 @@
     align-items: center;
 
     height: 80px;
+  }
+
+  &__title {
+    font-size: 24px;
+  }
+
+  &__line-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px 20px;
+
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
+}
+
+.line-item {
+  @include center-flex;
+  flex-direction: column;
+  padding: 17px 10px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: white;
+
+  &__thumb {
+    position: absolute;
+    height: 8px;
+    width: 100%;
+    bottom: 0px;
+  }
+}
+
+@each $lineId, $color in $subway-line-colors {
+  .line-item__#{$lineId} {
+    .line-item__thumb {
+      background-color: rgba($color, 0.5);
+    }
   }
 }
