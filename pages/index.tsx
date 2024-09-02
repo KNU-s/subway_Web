@@ -2,13 +2,13 @@ import { Header } from '@/components/Header';
 import { LineList } from '@/components/LineList';
 import { getLineInfo } from '@/services/stationInfo';
 import { Line } from '@/types/line';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 
 type HomePageProps = {
   lineInfo: Line[];
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   try {
     const lineInfo = await getLineInfo();
     return { props: { lineInfo: lineInfo } };
@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 const HomePage = ({ lineInfo }: HomePageProps) => {
   return (
     <div className="home">
-      <Header />
+      <Header title="노선" />
       <LineList lineInfo={lineInfo} />
     </div>
   );
