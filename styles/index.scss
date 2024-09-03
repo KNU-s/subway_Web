@@ -1,20 +1,12 @@
-// // setting
-// @import "./setting/common";
-// @import "./setting/fonts";
-// @import "./setting/mixins";
+// setting
+@import './setting/mixins';
 @import './setting/reset';
 @import './setting/vars';
 
-// // pages
+// pages
 @import './pages/home';
-// @import "./pages/main";
-// @import "./pages/lines";
-// @import "./pages/line-detail";
+@import './pages/line-detail';
 
-// // components
+// components
 @import './components/layout';
 @import './components/header';
-// @import "./components/section";
-// @import "./components/station";
-// @import "./components/train-info";
-// @import "./components/train-info-modal/_index";

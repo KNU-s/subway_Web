@@ -1,14 +1,15 @@
 import { Header } from '@/components/Header';
+import Map from '@/components/Map';
+import TrainMarker from '@/components/TrainMarker';
 import useWebSocket from '@/hooks/useWebSocket';
-import { getLineInfo } from '@/services/stationInfo';
+import { getLineByName } from '@/services/stationInfo';
 import { Line } from '@/types/line';
-import { Train } from '@/types/train';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 type LineDetailPageProps = {
-  lineInfo: Line[];
+  lineInfo: Line | null;
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -20,18 +21,20 @@ export const getStaticPaths: GetStaticPaths = () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
-    const lineInfo = await getLineInfo();
-    return { props: { lineInfo: lineInfo } };
+    if (params && typeof params.lineName === 'string') {
+      const lineInfo = await getLineByName(params.lineName);
+      return { props: { lineInfo } };
+    }
+    return { props: { lineInfo: null } };
   } catch (error) {
     console.error('Error fetching line info:', error);
-    return { props: { lineInfo: [] } };
+    return { props: { lineInfo: null } };
   }
 };
 
 const LineDetailPage = ({ lineInfo }: LineDetailPageProps) => {
   const router = useRouter();
   const [lineName, setLineName] = useState<string | null>(null);
-  const [trainList, setTrainList] = useState<Train[]>([]);
   const [message, loading] = useWebSocket(lineName || '');
 
   useEffect(() => {
@@ -44,6 +47,8 @@ const LineDetailPage = ({ lineInfo }: LineDetailPageProps) => {
     <div className='line-detail'>
       <Header showBackButton />
       {loading && '정보를 불러오는 중입니다. 잠시만 기다려 주세요.'}
+      {lineInfo && <Map stationList={lineInfo.stations} />}
+      <TrainMarker trainInfo={message} />
     </div>
   );
 };
