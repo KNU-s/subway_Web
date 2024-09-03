@@ -21,7 +21,7 @@ export const getStaticProps: GetStaticProps = async () => {
 const HomePage = ({ lineInfo }: HomePageProps) => {
   return (
     <div className='home'>
-      <Header title='노선' />
+      <Header />
       <LineList lineInfo={lineInfo} />
     </div>
   );

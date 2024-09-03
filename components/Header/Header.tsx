@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { GoChevronLeft } from 'react-icons/go';
 
 type HeaderProps = {
-  title: string;
   showBackButton?: boolean; // 뒤로가기 버튼 표시할지 여부
 };
 
@@ -18,7 +17,9 @@ const BackButton = () => {
   );
 };
 
-const Header = ({ title, showBackButton = false }: HeaderProps) => {
+const Header = ({ showBackButton = false }: HeaderProps) => {
+  const router = useRouter();
+  const title = typeof router.query.lineName === 'string' ? router.query.lineName : '노선';
   return (
     <div className='header'>
       {showBackButton && <BackButton />}

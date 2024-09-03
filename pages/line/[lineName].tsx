@@ -42,11 +42,7 @@ const LineDetailPage = ({ lineInfo }: LineDetailPageProps) => {
 
   return (
     <div className='line-detail'>
-      {lineName ? (
-        <Header title={lineName} showBackButton />
-      ) : (
-        <Header title='상세 노선' showBackButton />
-      )}
+      <Header showBackButton />
       {loading && '정보를 불러오는 중입니다. 잠시만 기다려 주세요.'}
     </div>
   );
