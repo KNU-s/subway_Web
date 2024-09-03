@@ -21,13 +21,13 @@ const useWebSocket: UseWebSocket = (lineName) => {
       const sendLineName = () => {
         if (webSocket.current && webSocket.current.readyState === WebSocket.OPEN) {
           webSocket.current.send(lineName);
-          setLoading(true);
         } else {
           console.error('WebSocket is not open.');
         }
       };
       sendLineName(); // 웹소켓 연결 후 전송
       intervalRef.current = setInterval(sendLineName, 5000); // 인터벌 설정
+      setLoading(false);
     };
 
     webSocket.current.onmessage = (event) => {
@@ -39,7 +39,6 @@ const useWebSocket: UseWebSocket = (lineName) => {
       try {
         const data = JSON.parse(message);
         setMessage(data);
-        setLoading(false);
       } catch (error) {
         console.log('Failed to parse JSON message:', error);
       }
@@ -50,6 +49,7 @@ const useWebSocket: UseWebSocket = (lineName) => {
         clearInterval(intervalRef.current); // 인터벌 해제
         intervalRef.current = null;
       }
+      setLoading(true);
       setTimeout(() => connectWebSocket(), 1000); // 재연결 시도
     };
 
