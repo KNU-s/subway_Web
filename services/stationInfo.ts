@@ -44,3 +44,13 @@ export const getLineInfo = async (): Promise<Line[]> => {
     throw new Error('Failed to get Line Data');
   }
 };
+
+export const getLineByName = async (lineName: string): Promise<Line | null> => {
+  try {
+    const allLines = await getLineInfo();
+    return allLines.find((line) => line.lineFullName === lineName) || null;
+  } catch (error) {
+    console.log(`Failed to get line by name (${lineName})`, error);
+    throw new Error('Failed to get Line Data');
+  }
+};
