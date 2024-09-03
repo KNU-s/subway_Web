@@ -9,6 +9,7 @@
     "next/core-web-vitals",
     "next/typescript",
     "eslint:recommended",
+    "eslint-config-prettier",
     "plugin:@typescript-eslint/recommended",
     "prettier"
   ]

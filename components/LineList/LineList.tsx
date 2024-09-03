@@ -7,7 +7,7 @@ type LineListProps = {
 
 const LineList = ({ lineInfo }: LineListProps) => {
   return (
-    <div className="home__line-list">
+    <div className='home__line-list'>
       {lineInfo.map((line) => (
         <LineItem key={line.lineUrlId} line={line} />
       ))}

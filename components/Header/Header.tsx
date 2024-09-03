@@ -12,7 +12,7 @@ const BackButton = () => {
     router.back();
   };
   return (
-    <div className="header__back-button" onClick={handleClick}>
+    <div className='header__back-button' onClick={handleClick}>
       <GoChevronLeft />
     </div>
   );
@@ -20,9 +20,9 @@ const BackButton = () => {
 
 const Header = ({ title, showBackButton = false }: HeaderProps) => {
   return (
-    <div className="header">
+    <div className='header'>
       {showBackButton && <BackButton />}
-      <h1 className="header__title">{title}</h1>
+      <h1 className='header__title'>{title}</h1>
     </div>
   );
 };
