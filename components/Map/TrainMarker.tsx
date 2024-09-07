@@ -67,7 +67,7 @@ const TrainMarker = ({ trainInfo }: TrainMarkerProps) => {
     status: calculateStatus(trainInfo),
   };
 
-  const iconPositionClassName = `train-info__${positionClass.updn}--${positionClass.status}`;
+  const iconPositionClassName = `train-marker__${positionClass.updn}--${positionClass.status}`;
 
   return (
     <div className={`train-marker ${iconPositionClassName}`} onClick={handleTrainClick}>
