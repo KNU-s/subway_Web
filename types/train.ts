@@ -8,6 +8,7 @@ export interface Train {
   statnNm: string;
   statnTNm: string;
   updnLine: string;
+  id?: string;
 }
 
 export interface TrainAtStation {

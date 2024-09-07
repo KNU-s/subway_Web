@@ -31,7 +31,7 @@ const Track = ({ direction, trains }: TrackProps) => {
     <div className={`track track--${direction}`}>
       <Direction direction={direction} />
       {trains.map((train) => (
-        <TrainMarker key={train.btrainNo} trainInfo={train} />
+        <TrainMarker key={train.id} trainInfo={train} />
       ))}
     </div>
   );
