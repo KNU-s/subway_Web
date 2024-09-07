@@ -1,8 +1,6 @@
+import { Train } from '@/types/train';
 import Track from './SingleTrack';
 
-type StationItemProps = {
-  stationName: string;
-};
 type StationTitleProps = {
   stationName: string;
 };
@@ -11,12 +9,18 @@ const StationTitle = ({ stationName }: StationTitleProps) => {
   return <div className='station__title'>{stationName}</div>;
 };
 
-const StationItem = ({ stationName }: StationItemProps) => {
+type StationItemProps = {
+  stationName: string;
+  upTrains: Train[];
+  downTrains: Train[];
+};
+
+const StationItem = ({ stationName, upTrains, downTrains }: StationItemProps) => {
   return (
     <div className='station'>
-      <Track direction='down' />
+      <Track direction='down' trains={downTrains} />
       <StationTitle stationName={stationName} />
-      <Track direction='up' />
+      <Track direction='up' trains={upTrains} />
     </div>
   );
 };

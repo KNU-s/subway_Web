@@ -1,12 +1,14 @@
 import { Station } from '@/types/station';
+import { Train } from '@/types/train';
 import { useEffect, useState } from 'react';
 import Section from './Section';
 
 type MapProps = {
   stationList: Station[];
+  trainInfo: Train[];
 };
 
-const Map = ({ stationList }: MapProps) => {
+const Map = ({ stationList, trainInfo }: MapProps) => {
   const [isGroup, setIsGroup] = useState(false); // 지하철 역이 구간별로 나눠졌는지 여부
   const [groupStationList, setGroupStationList] = useState([stationList]);
 
@@ -38,7 +40,7 @@ const Map = ({ stationList }: MapProps) => {
   return (
     <div className='map'>
       {groupStationList.map((stationList, index) => (
-        <Section key={index} stationList={stationList} isGroup={isGroup} />
+        <Section key={index} stationList={stationList} trainInfo={trainInfo} isGroup={isGroup} />
       ))}
     </div>
   );
