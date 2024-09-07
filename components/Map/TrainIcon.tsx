@@ -1,5 +1,3 @@
-// import TrainIcons from '../TrainIcons';
-
 import TrainIconExpressDown from '/public/images/train-icon-express-down.svg';
 import TrainIconExpressUp from '/public/images/train-icon-express-up.svg';
 import TrainIconRegularDown from '/public/images/train-icon-regular-down.svg';
