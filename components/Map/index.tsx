@@ -11,6 +11,7 @@ type MapProps = {
 const Map = ({ stationList, trainInfo }: MapProps) => {
   const [isGroup, setIsGroup] = useState(false); // 지하철 역이 구간별로 나눠졌는지 여부
   const [groupStationList, setGroupStationList] = useState([stationList]);
+  const [filteredTrainInfo, setFilteredTrainInfo] = useState([...trainInfo]);
 
   /** stationList 원소 객체에 groupId 속성이 있는지 확인한다. */
   useEffect(() => {
@@ -37,10 +38,22 @@ const Map = ({ stationList, trainInfo }: MapProps) => {
     }
   }, [isGroup, stationList]);
 
+  /** 열차의 종점이 역 이름과 매칭되지 않을 경우 해당 열차 제외한다. */
+  useEffect(() => {
+    const stationNames = new Set(stationList.map((station) => station.stationName)); // stationList의 역 이름들 집합
+    const filteredTrains = trainInfo.filter((train) => stationNames.has(train.bstatnNm)); // 역 이름 집합에 종점이 없을 경우 제외한다
+    setFilteredTrainInfo(filteredTrains);
+  }, [stationList, trainInfo]);
+
   return (
     <div className='map'>
       {groupStationList.map((stationList, index) => (
-        <Section key={index} stationList={stationList} trainInfo={trainInfo} isGroup={isGroup} />
+        <Section
+          key={index}
+          stationList={stationList}
+          trainInfo={filteredTrainInfo}
+          isGroup={isGroup}
+        />
       ))}
     </div>
   );
