@@ -4,10 +4,7 @@ type DestinationBoxProps = {
 };
 
 const DestinationBox = ({ direction, destination }: DestinationBoxProps) => {
-  const positionClass =
-    direction === '상행' || direction === '외선'
-      ? 'destination-box--right'
-      : 'destination-box--left';
+  const positionClass = direction === '상행' ? 'destination-box--right' : 'destination-box--left';
 
   return (
     <div className={`destination-box ${positionClass}`}>
