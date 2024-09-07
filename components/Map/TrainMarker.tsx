@@ -1,13 +1,24 @@
 import { Train } from '@/types/train';
+import { useState } from 'react';
 import DestinationBox from './DestinationBox';
 import TrainIcon from './TrainIcon';
+import TrainInfoModal from './TrainInfoModal';
 
 type TrainMarkerProps = {
   trainInfo: Train;
 };
 
 const TrainMarker = ({ trainInfo }: TrainMarkerProps) => {
-  const handleTrainClick = () => {};
+  const [showModal, setShowModal] = useState(false);
+
+  const handleTrainClick = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowModal(false);
+  };
 
   const calculateStatus = (info: Train) => {
     let status;
@@ -63,7 +74,7 @@ const TrainMarker = ({ trainInfo }: TrainMarkerProps) => {
 
   /* info에 따라 열차 위치 디테일하게 조정하기 위함 */
   const positionClass = {
-    updn: trainInfo.updnLine === '상행' || trainInfo.updnLine === '외선' ? 'up' : 'down',
+    updn: trainInfo.updnLine === '상행' ? 'up' : 'down',
     status: calculateStatus(trainInfo),
   };
 
@@ -71,6 +82,7 @@ const TrainMarker = ({ trainInfo }: TrainMarkerProps) => {
 
   return (
     <div className={`train-marker ${iconPositionClassName}`} onClick={handleTrainClick}>
+      {showModal && <TrainInfoModal closeModal={closeModal} trainInfo={trainInfo} />}
       <TrainIcon direction={trainInfo.updnLine} status={trainInfo.btrainSttus} />
       <DestinationBox direction={trainInfo.updnLine} destination={trainInfo.bstatnNm} />
     </div>
