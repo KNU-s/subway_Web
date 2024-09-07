@@ -45,7 +45,7 @@ const LineDetailPage = ({ lineInfo }: LineDetailPageProps) => {
   return (
     <div className='line-detail'>
       <Header showBackButton />
-      {loading && '정보를 불러오는 중입니다. 잠시만 기다려 주세요.'}
+      {/* {loading && '정보를 불러오는 중입니다. 잠시만 기다려 주세요.'} */}
       {lineInfo && <Map stationList={lineInfo.stations} trainInfo={message} />}
     </div>
   );
