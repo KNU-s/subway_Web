@@ -32,11 +32,16 @@ const Section = ({ stationList, trainInfo, isGroup }: SectionProps) => {
       {isGroup && <SectionTitle sectionName={sectionName} />}
       {stationList.map((station) => {
         // 해당 역에 위치한 상행/하행 열차를 필터링한다.
+        // 이때 외선을 상행으로, 내선을 하행으로 매칭시킨다.
         const upTrainsAtStation = trainInfo.filter(
-          (train) => train.statnNm === station.stationName && train.updnLine === '상행',
+          (train) =>
+            train.statnNm === station.stationName &&
+            (train.updnLine === '상행' || train.updnLine === '외선'),
         );
         const downTrainsAtStation = trainInfo.filter(
-          (train) => train.statnNm === station.stationName && train.updnLine === '하행',
+          (train) =>
+            train.statnNm === station.stationName &&
+            (train.updnLine === '하행' || train.updnLine === '내선'),
         );
         return (
           <StationItem
