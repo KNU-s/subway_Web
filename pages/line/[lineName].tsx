@@ -1,6 +1,5 @@
 import { Header } from '@/components/Header';
 import Map from '@/components/Map';
-import TrainMarker from '@/components/TrainMarker';
 import useWebSocket from '@/hooks/useWebSocket';
 import { getLineByName } from '@/services/stationInfo';
 import { Line } from '@/types/line';
@@ -47,8 +46,7 @@ const LineDetailPage = ({ lineInfo }: LineDetailPageProps) => {
     <div className='line-detail'>
       <Header showBackButton />
       {loading && '정보를 불러오는 중입니다. 잠시만 기다려 주세요.'}
-      {lineInfo && <Map stationList={lineInfo.stations} />}
-      <TrainMarker trainInfo={message} />
+      {lineInfo && <Map stationList={lineInfo.stations} trainInfo={message} />}
     </div>
   );
 };
