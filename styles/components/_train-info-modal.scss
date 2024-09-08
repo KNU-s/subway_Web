@@ -17,10 +17,12 @@
   }
 
   &__box {
-    width: 200px;
-    height: 300px;
+    max-width: 250px;
+    width: 100%;
+    min-height: 50px;
     background-color: white;
     border-radius: 15px;
+    padding: 20px 20px;
 
     /* modal 안의 내용들을 세로로 가운데 배치 */
     @include center-flex;
@@ -43,7 +45,40 @@
   }
 
   &__content {
-    display: flex;
+    @include center-flex;
     flex-direction: column;
+
+    .arrival-message {
+      max-width: max-content;
+      padding: 3px 10px;
+      margin-top: 15px;
+    }
+
+    .station-info {
+      @include center-flex;
+      flex-direction: row;
+      background-color: var(--fill-gray-first);
+      width: 200px;
+      max-width: 100%;
+      margin-top: 15px;
+      padding: 5px 10px;
+      border-radius: 8px;
+
+      &__current-station {
+        flex: 1;
+        font-size: 14px;
+      }
+
+      &__direction-icon {
+        @include center-flex;
+        min-width: 50px;
+        font-size: 24px;
+      }
+
+      &__final-station {
+        flex: 1;
+        font-size: 14px;
+      }
+    }
   }
 }

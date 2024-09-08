@@ -1,5 +1,6 @@
 import { Train } from '@/types/train';
 import React, { ReactNode } from 'react';
+import { HiArrowLongRight } from 'react-icons/hi2';
 import { IoCloseOutline } from 'react-icons/io5';
 
 type BackgroundProps = {
@@ -40,13 +41,15 @@ const CloseButton = ({ closeModal }: CloseButtonProps) => {
 const ModalContent = ({ trainInfo }: ModalContentProps) => {
   return (
     <div className='train-info-modal__content'>
-      <div>열차 #{trainInfo.btrainNo}</div>
-      <div>{trainInfo.arvlMsg}</div>
-      <div>{trainInfo.arvlStatus}</div>
-      <div>이전: {trainInfo.statnFNm}</div>
-      <div>현재: {trainInfo.statnNm}</div>
-      <div>다음: {trainInfo.statnTNm}</div>
-      <div>종점: {trainInfo.bstatnNm}</div>
+      <div className='train-number'>#{trainInfo.btrainNo}</div>
+      <div className='arrival-message'>{trainInfo.arvlMsg}</div>
+      <div className='station-info'>
+        <div className='station-info__current-station'>{trainInfo.statnNm}</div>
+        <div className='station-info__direction-icon'>
+          <HiArrowLongRight />
+        </div>
+        <div className='station-info__final-station'>{trainInfo.bstatnNm}</div>
+      </div>
     </div>
   );
 };
