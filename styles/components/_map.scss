@@ -31,10 +31,21 @@
   }
 }
 
+/* lineId 값에 따라 Track 색상 매칭 */
+@each $lineId, $color in $subway-line-colors {
+  .track--#{$lineId} {
+    background-color: $color;
+  }
+}
+
+/* lineId 값이 없는 경우 default 색상 적용 */
+.track--default {
+  background-color: var(--track--default);
+}
+
 .track {
   width: 2px;
   height: 60px;
-  background-color: var(--track-default);
 
   /* track__direction을 가운데에 놓기 위함 */
   display: flex;

@@ -1,5 +1,5 @@
 import { Train } from '@/types/train';
-import Track from './SingleTrack';
+import Track from './Track';
 
 type StationTitleProps = {
   stationName: string;
