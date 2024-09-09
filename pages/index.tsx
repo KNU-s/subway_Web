@@ -1,7 +1,7 @@
 import { Header } from '@/components/Header';
 import { LineList } from '@/components/LineList';
-import { getLineInfo } from '@/services/stationInfo';
 import { Line } from '@/types/line';
+import axios from 'axios';
 import { GetStaticProps } from 'next';
 
 type HomePageProps = {
@@ -10,7 +10,7 @@ type HomePageProps = {
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const lineInfo = await getLineInfo();
+    const { data: lineInfo } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/line`);
     return { props: { lineInfo: lineInfo } };
   } catch (error) {
     console.error('Error fetching line info:', error);

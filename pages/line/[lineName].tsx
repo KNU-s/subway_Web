@@ -1,8 +1,8 @@
 import { Header } from '@/components/Header';
 import Map from '@/components/Map';
 import useWebSocket from '@/hooks/useWebSocket';
-import { getLineByName } from '@/services/stationInfo';
 import { Line } from '@/types/line';
+import axios from 'axios';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -21,7 +21,9 @@ export const getStaticPaths: GetStaticPaths = () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     if (params && typeof params.lineName === 'string') {
-      const lineInfo = await getLineByName(params.lineName);
+      const { data: lineInfo } = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/line/${params.lineName}`,
+      );
       return { props: { lineInfo } };
     }
     return { props: { lineInfo: null } };
