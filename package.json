@@ -1,63 +1,33 @@
 {
-  "name": "subway",
-  "version": "0.1.0",
-  "private": true,
+  "name": "subway_web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@tanstack/react-query": "^5.51.16",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.7.2",
-    "env-cmd": "^10.1.0",
+    "@tanstack/react-query": "^5.53.1",
+    "axios": "^1.7.6",
+    "next": "^14.2.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-icons": "^5.2.1",
-    "react-router-dom": "^6.25.1",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "zustand": "^4.5.4"
-  },
-  "scripts": {
-    "start": "env-cmd -f .env.development react-scripts start",
-    "start:https": "HTTPS=true SSL_CRT_FILE=./cert/localhost.pem SSL_KEY_FILE=./cert/localhost-key.pem env-cmd -f .env.development react-scripts start",
-    "start:inspect": "node --inspect ./node_modules/.bin/react-scripts start",
-    "build": "HTTPS=true SSL_CRT_FILE=./cert/localhost.pem SSL_KEY_FILE=./cert/localhost-key.pem env-cmd -f .env.production react-scripts build",
-    "test:ignore": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\"",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "react-icons": "^5.3.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/plugin-transform-private-property-in-object": "^7.24.7",
-    "@babel/preset-env": "^7.25.3",
-    "@testing-library/react": "^16.0.0",
-    "@types/node": "^22.5.0",
+    "@svgr/webpack": "^8.1.0",
+    "@types/node": "^22.5.1",
     "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.3.0",
-    "@typescript-eslint/parser": "^8.3.0",
-    "babel-jest": "^29.7.0",
-    "css-loader": "^7.1.2",
     "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.7",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.3.3",
     "sass": "^1.77.8",
-    "sass-loader": "^16.0.1",
-    "style-loader": "^4.0.0",
-    "typescript": "^4.9.5"
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "node_modules/(?!axios)"
-    ]
+    "typescript": "^5.5.4"
   }
 }

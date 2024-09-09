@@ -1,0 +1,84 @@
+@import '../setting/_mixins';
+
+.train-info-modal {
+  &__background {
+    height: 100%;
+    width: 100%;
+    z-index: 1000; /* modal 최상위 배치 */
+
+    @include center-flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    text-align: center;
+    background-color: var(--fill-black-alpha);
+
+    cursor: pointer;
+  }
+
+  &__box {
+    max-width: 250px;
+    width: 100%;
+    min-height: 50px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px 20px;
+
+    /* modal 안의 내용들을 세로로 가운데 배치 */
+    @include center-flex;
+    flex-direction: column;
+
+    /* close-button을 우상단에 배치하기 위함 */
+    position: relative;
+
+    cursor: default;
+  }
+
+  &__close-button {
+    @include button-styles(20px);
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    cursor: pointer;
+  }
+
+  &__content {
+    @include center-flex;
+    flex-direction: column;
+
+    .arrival-message {
+      max-width: max-content;
+      padding: 3px 10px;
+      margin-top: 15px;
+    }
+
+    .station-info {
+      @include center-flex;
+      flex-direction: row;
+      background-color: var(--fill-gray-first);
+      width: 200px;
+      max-width: 100%;
+      margin-top: 15px;
+      padding: 5px 10px;
+      border-radius: 8px;
+
+      &__current-station {
+        flex: 1;
+        font-size: 14px;
+      }
+
+      &__direction-icon {
+        @include center-flex;
+        min-width: 50px;
+        font-size: 24px;
+      }
+
+      &__final-station {
+        flex: 1;
+        font-size: 14px;
+      }
+    }
+  }
+}

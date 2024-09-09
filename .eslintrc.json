@@ -1,0 +1,16 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "eslint:recommended",
+    "eslint-config-prettier",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ]
+}

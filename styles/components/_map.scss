@@ -1,0 +1,83 @@
+@import '../setting/_mixins';
+
+.section {
+  display: grid;
+
+  &__title {
+    background-color: var(--line-gray-second);
+    border-radius: 10px;
+    padding: 5px 15px;
+
+    display: flex;
+    flex-direction: row;
+
+    font-size: 12px;
+    color: var(--line-gray-first);
+  }
+}
+
+.station {
+  position: relative;
+  height: 60px;
+  border-bottom: 1px solid var(--line-gray-second);
+
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1.3fr;
+  justify-items: center;
+  align-items: center;
+
+  &__title {
+    width: 100px; // 필요한 경우 최대 너비 설정
+  }
+}
+
+/* lineId 값에 따라 Track 색상 매칭 */
+@each $lineId, $color in $subway-line-colors {
+  .track--#{$lineId} {
+    background-color: $color;
+  }
+}
+
+/* lineId 값이 없는 경우 default 색상 적용 */
+.track--default {
+  background-color: var(--track--default);
+}
+
+.track {
+  width: 2px;
+  height: 60px;
+
+  /* track__direction을 가운데에 놓기 위함 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* train-marker를 자유롭게 움직이기 위함 */
+  position: relative;
+
+  &--up {
+    margin-right: 50px;
+  }
+  &--down {
+    margin-left: 50px;
+  }
+
+  .direction {
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    background-color: white;
+    // border: 1px solid #cccccc;
+    border: 1px solid var(--line-gray-third);
+
+    /* 화살표 아이콘 정중앙에 배치하기 위함 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__icon {
+      color: var(--line-gray-third);
+    }
+  }
+}
