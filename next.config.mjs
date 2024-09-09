@@ -10,7 +10,7 @@ const nextConfig = {
     includePaths: ['styles'],
   },
 
-  output: 'export',
+  // output: 'export',
 
   webpack(config, options) {
     // SVG 파일을 React 컴포넌트로 변환하는 설정 추가

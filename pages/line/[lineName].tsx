@@ -21,9 +21,6 @@ export const getStaticPaths: GetStaticPaths = () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     if (params && typeof params.lineName === 'string') {
-      // const { data: lineInfo } = await axios.get(
-      //   `${process.env.NEXT_PUBLIC_BASE_URL}/api/line/${params.lineName}`,
-      // );
       const lineInfo = await getLineByName(params.lineName);
       return { props: { lineInfo } };
     }
@@ -43,7 +40,7 @@ const LineDetailPage = ({ lineInfo }: LineDetailPageProps) => {
     if (typeof router.query.lineName === 'string') {
       setLineName(router.query.lineName);
     }
-  }, [router]);
+  }, [router.query.lineName]);
 
   return (
     <div className='line-detail'>
