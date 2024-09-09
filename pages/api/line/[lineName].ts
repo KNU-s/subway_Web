@@ -1,4 +1,4 @@
-import { getLineInfo } from '@/services/lineInfo';
+import { getLineByName } from '@/services/lineInfo';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
@@ -7,8 +7,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     return res.status(400).json({ message: 'Invalid line name' });
   }
   try {
-    const allLines = await getLineInfo();
-    const line = allLines.find((line) => line.lineFullName === lineName);
+    const line = await getLineByName(lineName);
     if (line) {
       res.status(200).json(line);
     } else {
