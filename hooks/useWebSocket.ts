@@ -20,7 +20,7 @@ const useWebSocket: UseWebSocket = (lineName) => {
     webSocket.current.onopen = () => {
       const sendLineName = () => {
         if (webSocket.current && webSocket.current.readyState === WebSocket.OPEN) {
-          webSocket.current.send(lineName);
+          webSocket.current.send(`노선_${lineName}`);
         } else {
           console.error('WebSocket is not open.');
         }
