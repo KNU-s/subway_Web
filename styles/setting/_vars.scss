@@ -1,5 +1,13 @@
 /* 변수 설정 */
 
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 $breakpoint-mobile: 540px; /* 모바일-태블릿 경계 너비 */
 $breakpoint-desktop: 1024px; /* 데스크탑-태블릿 경계 너비 */
 
