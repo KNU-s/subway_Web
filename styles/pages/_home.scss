@@ -19,7 +19,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 15px 20px;
 
-    padding-top: 20px;
+    padding-top: 10px;
     padding-bottom: 40px;
   }
 }
@@ -32,6 +32,7 @@
   border-radius: 12px;
   overflow: hidden;
   background-color: white;
+  font-size: 13px;
 
   &__thumb {
     position: absolute;

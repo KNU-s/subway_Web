@@ -1,4 +1,3 @@
-import { Header } from '@/components/Header';
 import { LineList } from '@/components/LineList';
 import { getLineInfo } from '@/services/lineInfo';
 import { Line } from '@/types/line';
@@ -22,7 +21,6 @@ export const getStaticProps: GetStaticProps = async () => {
 const HomePage = ({ lineInfo }: HomePageProps) => {
   return (
     <div className='home'>
-      <Header />
       <LineList lineInfo={lineInfo} />
     </div>
   );
