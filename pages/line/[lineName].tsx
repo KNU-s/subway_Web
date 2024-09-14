@@ -1,5 +1,6 @@
 import { Header } from '@/components/Header';
 import Map from '@/components/Map';
+import RefreshButton from '@/components/RefreshButton';
 import Wrapper from '@/components/Wrapper';
 import useWebSocket from '@/hooks/useWebSocket';
 import { getLineByName } from '@/services/lineInfo';
@@ -35,7 +36,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 const LineDetailPage = ({ lineInfo }: LineDetailPageProps) => {
   const router = useRouter();
   const [lineName, setLineName] = useState<string | null>(null);
-  const [message, loading] = useWebSocket(lineName || '');
+  const [message, loading, sendMessage] = useWebSocket(lineName || '');
 
   useEffect(() => {
     if (typeof router.query.lineName === 'string') {
@@ -50,6 +51,7 @@ const LineDetailPage = ({ lineInfo }: LineDetailPageProps) => {
       {lineInfo && (
         <Wrapper>
           <Map stationList={lineInfo.stations} trainInfo={message} />{' '}
+          <RefreshButton sendMessage={sendMessage} />
         </Wrapper>
       )}
     </div>

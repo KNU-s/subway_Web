@@ -1,0 +1,50 @@
+@import '../setting/_mixins';
+@import '../setting/_vars';
+
+.refresh-button {
+  &__container {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    cursor: pointer;
+
+    @include center-flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    /* lineId 값에 따라 버튼 배경색 변경함 */
+    @each $lineId, $color in $subway-line-colors {
+      &--line-#{$lineId} {
+        background-color: $color;
+      }
+    }
+
+    /* 버튼 클릭 후 일정 시간 동안 비활성화 */
+    &.disabled {
+      cursor: default;
+      opacity: 0.5;
+    }
+  }
+
+  &__icon {
+    @include center-flex;
+    font-size: 18px;
+    color: white;
+
+    /* 버튼 클릭 후 회전 애니메이션 */
+    transition: transform 0.3s ease-in-out;
+    &.rotating {
+      animation: rotate 1s linear infinite;
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

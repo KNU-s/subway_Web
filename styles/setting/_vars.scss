@@ -43,6 +43,10 @@ $subway-line-colors: (
 
   --track-default: #fcb726;
 
+  @each $line-id, $color in $subway-line-colors {
+    --line-color-#{$line-id}: #{$color};
+  }
+
   --line-1001-color: #0052a4; /* 1호선 */
   --line-1002-color: #00a84d; /* 2호선 */
   --line-1003-color: #ef7c1c; /* 3호선 */
