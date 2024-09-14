@@ -1,5 +1,6 @@
 import { Header } from '@/components/Header';
 import Map from '@/components/Map';
+import Wrapper from '@/components/Wrapper';
 import useWebSocket from '@/hooks/useWebSocket';
 import { getLineByName } from '@/services/lineInfo';
 import { Line } from '@/types/line';
@@ -44,9 +45,13 @@ const LineDetailPage = ({ lineInfo }: LineDetailPageProps) => {
 
   return (
     <div className='line-detail'>
-      <Header showBackButton />
+      <Header />
       {/* {loading && '정보를 불러오는 중입니다. 잠시만 기다려 주세요.'} */}
-      {lineInfo && <Map stationList={lineInfo.stations} trainInfo={message} />}
+      {lineInfo && (
+        <Wrapper>
+          <Map stationList={lineInfo.stations} trainInfo={message} />{' '}
+        </Wrapper>
+      )}
     </div>
   );
 };
