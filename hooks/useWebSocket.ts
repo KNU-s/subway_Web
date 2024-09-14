@@ -1,13 +1,14 @@
-import { LoadingState, Message } from '@/types/webSocket';
+import { LoadingState, Message, SendMessage } from '@/types/webSocket';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-type UseWebSocket = (lineName: string) => [Message, LoadingState];
+type UseWebSocket = (lineName: string) => [Message, LoadingState, SendMessage];
 
 const useWebSocket: UseWebSocket = (lineName) => {
   const [message, setMessage] = useState<Message>([]);
   const [loading, setLoading] = useState(true);
   const webSocket = useRef<WebSocket | null>(null); // 소켓을 저장할 인스턴스 변수
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const lastSentTime = useRef<number>(0); // 메시지 마지막 전송한 시간
 
   const connectWebSocket = useCallback(() => {
     const socketUrl = process.env.NEXT_PUBLIC_WEBSOCKET_URL;
@@ -74,7 +75,19 @@ const useWebSocket: UseWebSocket = (lineName) => {
     };
   }, [lineName, connectWebSocket]);
 
-  return [message, loading];
+  const sendMessage = useCallback(() => {
+    const now = Date.now();
+    if (webSocket.current && webSocket.current.readyState === WebSocket.OPEN) {
+      if (now - lastSentTime.current >= 3000) {
+        webSocket.current.send(`노선_${lineName}`); // 최소 3초가 지나야만 메시지 전송 가능
+        lastSentTime.current = now; // 메시지 전송 시간 업데이트
+      }
+    } else {
+      console.error('WebSocket is not open.');
+    }
+  }, [lineName]);
+
+  return [message, loading, sendMessage];
 };
 
 export default useWebSocket;
