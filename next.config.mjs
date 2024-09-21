@@ -1,3 +1,10 @@
+import withPWAInit from 'next-pwa';
+
+const withPWA = withPWAInit({
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
+});
+
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
@@ -9,9 +16,6 @@ const nextConfig = {
   sassOptions: {
     includePaths: ['styles'],
   },
-
-  // output: 'export',
-
   webpack(config, options) {
     // SVG 파일을 React 컴포넌트로 변환하는 설정 추가
     config.module.rules.push({
@@ -29,4 +33,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPWA(nextConfig);
